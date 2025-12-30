@@ -1,0 +1,84 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Profile;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class SettingsController extends Controller
+{
+    public function index()
+    {
+        $profile = Profile::first();
+        return view('admin.settings', compact('profile'));
+    }
+
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
+            'bio' => 'nullable|string',
+            'bio_id' => 'nullable|string',
+            'story' => 'nullable|string',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:50',
+            'whatsapp' => 'nullable|string|max:50',
+            'location' => 'nullable|string|max:255',
+            'years_experience' => 'nullable|integer|min:0',
+            'total_projects' => 'nullable|integer|min:0',
+            'happy_clients' => 'nullable|integer|min:0',
+            'awards' => 'nullable|integer|min:0',
+            'social_links' => 'nullable|array',
+            'social_links.*' => 'nullable|url',
+        ]);
+
+        $profile = Profile::first();
+        
+        if ($profile) {
+            $profile->update($validated);
+        } else {
+            Profile::create($validated);
+        }
+
+        return back()->with('success', 'Pengaturan berhasil diperbarui!');
+    }
+
+    public function uploadCV(Request $request)
+    {
+        $request->validate([
+            'cv_file' => 'required|mimes:pdf|max:5120',
+        ]);
+
+        $profile = Profile::first();
+
+        if ($profile->cv_file) {
+            Storage::disk('public')->delete($profile->cv_file);
+        }
+
+        $path = $request->file('cv_file')->store('cv', 'public');
+        $profile->update(['cv_file' => $path]);
+
+        return back()->with('success', 'CV berhasil diupload!');
+    }
+
+    public function uploadPhoto(Request $request)
+    {
+        $request->validate([
+            'photo' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $profile = Profile::first();
+
+        if ($profile->photo) {
+            Storage::disk('public')->delete($profile->photo);
+        }
+
+        $path = $request->file('photo')->store('profile', 'public');
+        $profile->update(['photo' => $path]);
+
+        return back()->with('success', 'Foto profil berhasil diupload!');
+    }
+}
