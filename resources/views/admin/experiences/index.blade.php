@@ -39,7 +39,7 @@
                         <span class="category-badge">{{ $experience->type }}</span>
                     </td>
                     <td>
-                        {{ $experience->start_date->format('M Y') }} - {{ $experience->end_date ? $experience->end_date->format('M Y') : 'Present' }}
+                        {{ $experience->formatted_start_date }} - {{ $experience->formatted_end_date }}
                     </td>
                     <td>
                         <div class="table-actions">

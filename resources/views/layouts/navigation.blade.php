@@ -15,6 +15,21 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.projects.index')" :active="request()->routeIs('admin.projects.*')">
+                        {{ __('Projects') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.experiences.index')" :active="request()->routeIs('admin.experiences.*')">
+                        {{ __('Experience') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.education.index')" :active="request()->routeIs('admin.education.*')">
+                        {{ __('Education') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.technologies.index')" :active="request()->routeIs('admin.technologies.*')">
+                        {{ __('Technologies') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.skills.index')" :active="request()->routeIs('admin.skills.*')">
+                        {{ __('Skills') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -69,6 +84,21 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.projects.index')" :active="request()->routeIs('admin.projects.*')">
+                {{ __('Projects') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.experiences.index')" :active="request()->routeIs('admin.experiences.*')">
+                {{ __('Experience') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.education.index')" :active="request()->routeIs('admin.education.*')">
+                {{ __('Education') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.technologies.index')" :active="request()->routeIs('admin.technologies.*')">
+                {{ __('Technologies') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.skills.index')" :active="request()->routeIs('admin.skills.*')">
+                {{ __('Skills') }}
             </x-responsive-nav-link>
         </div>
 

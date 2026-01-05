@@ -23,6 +23,10 @@
                         <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $profile->name ?? '') }}" required>
                     </div>
                     <div class="form-group">
+                        <label for="website_title">Judul Website</label>
+                        <input type="text" id="website_title" name="website_title" class="form-control" value="{{ old('website_title', $profile->website_title ?? '') }}" placeholder="Tubagus | Portofolio">
+                    </div>
+                    <div class="form-group">
                         <label for="title">Jabatan / Title (Pisahkan koma untuk animasi)</label>
                         <input type="text" id="title" name="title" class="form-control" value="{{ old('title', $profile->title ?? '') }}" placeholder="Developer, Designer">
                     </div>
@@ -129,6 +133,28 @@
     </div>
 
     <div>
+        <!-- Favicon Upload -->
+        <div class="photo-upload-card" style="margin-bottom: 24px;">
+            <div class="current-photo" style="border-radius: 12px; width: 80px; height: 80px; margin: 0 auto 16px;">
+                @if($profile && $profile->favicon)
+                    <img src="{{ asset('storage/' . $profile->favicon) }}" alt="Favicon" style="width: 100%; height: 100%; object-fit: contain;">
+                @else
+                    <div style="width: 100%; height: 100%; background: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; border-radius: 12px;">
+                        <i class="fas fa-globe" style="font-size: 24px; color: var(--text-secondary);"></i>
+                    </div>
+                @endif
+            </div>
+            <h4 style="margin-bottom: 8px;">Favicon</h4>
+            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">Format .ICO, .PNG, .SVG. Maksimal 1MB.</p>
+            <form action="{{ route('admin.settings.upload-favicon') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="favicon" id="favicon" accept=".ico,.png,.jpg,.jpeg,.svg" style="display: none;" onchange="this.form.submit()">
+                <label for="favicon" class="btn btn-outline" style="cursor: pointer;">
+                    <i class="fas fa-camera"></i> Ganti Favicon
+                </label>
+            </form>
+        </div>
+
         <!-- Profile Photo -->
         <div class="photo-upload-card" style="margin-bottom: 24px;">
             <div class="current-photo">

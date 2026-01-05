@@ -40,6 +40,20 @@
 
         <div class="form-row">
             <div class="form-group">
+                <label>Date Display Format</label>
+                <div style="display: flex; gap: 15px; margin-top: 5px;">
+                    <label style="cursor: pointer;">
+                        <input type="radio" name="date_format" value="F Y" {{ old('date_format', $education->date_format ?? 'Y') == 'F Y' ? 'checked' : '' }}> Month & Year (e.g. Jan 2024)
+                    </label>
+                    <label style="cursor: pointer;">
+                        <input type="radio" name="date_format" value="Y" {{ old('date_format', $education->date_format ?? 'Y') == 'Y' ? 'checked' : '' }}> Year Only (e.g. 2024)
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
                 <label for="start_date">Start Date *</label>
                 <input type="date" id="start_date" name="start_date" class="form-control" value="{{ old('start_date', $education->start_date->format('Y-m-d')) }}" required>
             </div>
@@ -63,6 +77,9 @@
         <div class="form-group">
             <label for="description">Description (Optional)</label>
             <textarea id="description" name="description" class="form-control" rows="4">{{ old('description', $education->description) }}</textarea>
+            <div class="form-help" style="margin-top: 5px; color: #666; font-size: 0.9em;">
+                <i class="fas fa-info-circle"></i> Tip: Gunakan tanda strip (-) di awal baris untuk membuat bullet points.
+            </div>
         </div>
 
         <div class="form-actions">

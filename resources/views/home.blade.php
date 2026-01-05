@@ -3,6 +3,7 @@
 @section('title', 'Tubagus | Portofolio')
 
 @section('content')
+@if(in_array('hero', $visibleSections))
 <!-- Hero Section with Typed.js Animation -->
 <section class="hero" id="home">
     <div class="container">
@@ -53,6 +54,9 @@
     
 
 </section>
+@endif
+
+@if(in_array('stats', $visibleSections))
 
 <!-- Stats Counter -->
 <section class="stats-section">
@@ -77,7 +81,9 @@
         </div>
     </div>
 </section>
-</section>
+@endif
+
+@if(in_array('about', $visibleSections))
 
 <!-- About Me Section -->
 <section class="about-section-landing" id="about">
@@ -101,7 +107,9 @@
         </div>
     </div>
 </section>
+@endif
 
+@if(in_array('experience', $visibleSections))
 <!-- Professional Experience Section -->
 <section class="experience-section-landing" id="experience">
     <div class="container">
@@ -109,36 +117,107 @@
         
         <div class="exp-timeline">
             @foreach($experiences as $experience)
-            <div class="exp-row">
+            <div class="exp-row {{ $loop->index >= 3 ? 'exp-hidden-item' : '' }}">
                 @if($loop->odd)
                     <div class="exp-content exp-left">
                         <div class="exp-badge">
                             <div class="exp-badge-col">
-                                <span class="exp-badge-value">{{ $experience->start_date->format('M Y') }}</span>
+                                <span class="exp-badge-value">{{ $experience->formatted_start_date }}</span>
                                 <span class="exp-badge-label" data-translate="exp_start">Start</span>
                             </div>
                             <div class="exp-badge-divider"></div>
                             <div class="exp-badge-col">
-                                <span class="exp-badge-value">{{ $experience->end_date ? $experience->end_date->format('M Y') : 'Present' }}</span>
+                                <span class="exp-badge-value">{{ $experience->formatted_end_date }}</span>
                                 <span class="exp-badge-label" data-translate="exp_end">End</span>
                             </div>
                             <div class="exp-badge-divider"></div>
                             <div class="exp-badge-col">
-                                <span class="exp-badge-value">{{ $experience->location ?? '-' }}</span>
+                                <!-- Location ID -->
+                                <span class="exp-badge-value lang-id" data-display="block" style="display: block;">{{ $experience->location ?? '-' }}</span>
+                                <!-- Location EN -->
+                                <span class="exp-badge-value lang-en" data-display="block" style="display: none;">{{ $experience->location_en ?? $experience->location ?? '-' }}</span>
                                 <span class="exp-badge-label" data-translate="exp_location">Location</span>
                             </div>
                         </div>
                         <div class="exp-card">
-                            <h3 class="exp-company">{{ $experience->company }}</h3>
-                            <p class="exp-position">{{ $experience->title }}<span class="exp-type">•  <span>{{ $experience->type }}</span></span></p>
-                            <p class="exp-description">
-                                {{ $experience->description }}
+                            <!-- Company ID -->
+                            <h3 class="exp-company lang-id" data-display="block" style="display: block;">{{ $experience->company }}</h3>
+                            <!-- Company EN -->
+                            <h3 class="exp-company lang-en" data-display="block" style="display: none;">{{ $experience->company_en ?? $experience->company }}</h3>
+
+                            <p class="exp-position">
+                                <!-- Title ID -->
+                                <span class="lang-id" data-display="inline" style="display: inline;">{{ $experience->title }}</span>
+                                <!-- Title EN -->
+                                <span class="lang-en" data-display="inline" style="display: none;">{{ $experience->title_en ?? $experience->title }}</span>
+                                
+                                <span class="exp-type">• <span>{{ $experience->type }}</span></span>
                             </p>
-                            @if($experience->technologies)
+                            
+                            <div class="exp-description">
+                                <!-- Description ID -->
+                                <div class="lang-id" data-display="block" style="display: block;">
+                                    @if(Str::contains($experience->description, '- '))
+                                        <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                            @foreach(explode("\n", $experience->description) as $line)
+                                                @if(trim($line))
+                                                    @if(str_starts_with(trim($line), '-'))
+                                                        <li style="margin-bottom: 4px;">{{ trim(substr(trim($line), 1)) }}</li>
+                                                    @else
+                                                        <li style="list-style-type: none; margin-left: -20px;">{{ $line }}</li>
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        {!! nl2br(e($experience->description)) !!}
+                                    @endif
+                                </div>
+
+                                <!-- Description EN -->
+                                <div class="lang-en" data-display="block" style="display: none;">
+                                    @php
+                                        $descEn = $experience->description_en ?? $experience->description;
+                                    @endphp
+                                    @if(Str::contains($descEn, '- '))
+                                        <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                            @foreach(explode("\n", $descEn) as $line)
+                                                @if(trim($line))
+                                                    @if(str_starts_with(trim($line), '-'))
+                                                        <li style="margin-bottom: 4px;">{{ trim(substr(trim($line), 1)) }}</li>
+                                                    @else
+                                                        <li style="list-style-type: none; margin-left: -20px;">{{ $line }}</li>
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        {!! nl2br(e($descEn)) !!}
+                                    @endif
+                                </div>
+                            </div>
+
+                            @if($experience->technologies || $experience->technologies_en)
                                 <div class="exp-tags">
-                                    @foreach($experience->technologies as $tech)
-                                        <span class="exp-tag">{{ $tech }}</span>
-                                    @endforeach
+                                    <div class="lang-id" style="display: block;">
+                                        @if($experience->technologies)
+                                            @foreach($experience->technologies as $tech)
+                                                <span class="exp-tag">{{ $tech }}</span>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                    <div class="lang-en" style="display: none;">
+                                        @if($experience->technologies_en)
+                                            @foreach($experience->technologies_en as $tech)
+                                                <span class="exp-tag">{{ $tech }}</span>
+                                            @endforeach
+                                        @elseif($experience->technologies)
+                                            {{-- Fallback --}}
+                                            @foreach($experience->technologies as $tech)
+                                                <span class="exp-tag">{{ $tech }}</span>
+                                            @endforeach
+                                        @endif
+                                    </div>
                                 </div>
                             @endif
                         </div>
@@ -155,31 +234,102 @@
                     <div class="exp-content exp-right">
                         <div class="exp-badge">
                             <div class="exp-badge-col">
-                                <span class="exp-badge-value">{{ $experience->start_date->format('M Y') }}</span>
+                                <span class="exp-badge-value">{{ $experience->formatted_start_date }}</span>
                                 <span class="exp-badge-label" data-translate="exp_start">Start</span>
                             </div>
                             <div class="exp-badge-divider"></div>
                             <div class="exp-badge-col">
-                                <span class="exp-badge-value">{{ $experience->end_date ? $experience->end_date->format('M Y') : 'Present' }}</span>
+                                <span class="exp-badge-value">{{ $experience->formatted_end_date }}</span>
                                 <span class="exp-badge-label" data-translate="exp_end">End</span>
                             </div>
                             <div class="exp-badge-divider"></div>
                             <div class="exp-badge-col">
-                                <span class="exp-badge-value">{{ $experience->location ?? '-' }}</span>
+                                 <!-- Location ID -->
+                                <span class="exp-badge-value lang-id" style="display: block;">{{ $experience->location ?? '-' }}</span>
+                                <!-- Location EN -->
+                                <span class="exp-badge-value lang-en" style="display: none;">{{ $experience->location_en ?? $experience->location ?? '-' }}</span>
                                 <span class="exp-badge-label" data-translate="exp_location">Location</span>
                             </div>
                         </div>
                         <div class="exp-card">
-                            <h3 class="exp-company">{{ $experience->company }}</h3>
-                            <p class="exp-position">{{ $experience->title }}<span class="exp-type">• <span>{{ $experience->type }}</span></span></p>
-                            <p class="exp-description">
-                                {{ $experience->description }}
+                             <!-- Company ID -->
+                            <h3 class="exp-company lang-id" style="display: block;">{{ $experience->company }}</h3>
+                            <!-- Company EN -->
+                            <h3 class="exp-company lang-en" style="display: none;">{{ $experience->company_en ?? $experience->company }}</h3>
+
+                            <p class="exp-position">
+                                <!-- Title ID -->
+                                <span class="lang-id" style="display: inline;">{{ $experience->title }}</span>
+                                <!-- Title EN -->
+                                <span class="lang-en" style="display: none;">{{ $experience->title_en ?? $experience->title }}</span>
+
+                                <span class="exp-type">• <span>{{ $experience->type }}</span></span>
                             </p>
-                             @if($experience->technologies)
+
+                            <div class="exp-description">
+                                 <!-- Description ID -->
+                                <div class="lang-id" style="display: block;">
+                                    @if(Str::contains($experience->description, '- '))
+                                        <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                            @foreach(explode("\n", $experience->description) as $line)
+                                                @if(trim($line))
+                                                    @if(str_starts_with(trim($line), '-'))
+                                                        <li style="margin-bottom: 4px;">{{ trim(substr(trim($line), 1)) }}</li>
+                                                    @else
+                                                        <li style="list-style-type: none; margin-left: -20px;">{{ $line }}</li>
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        {!! nl2br(e($experience->description)) !!}
+                                    @endif
+                                </div>
+                                
+                                <!-- Description EN -->
+                                <div class="lang-en" style="display: none;">
+                                    @php
+                                        $descEn = $experience->description_en ?? $experience->description;
+                                    @endphp
+                                    @if(Str::contains($descEn, '- '))
+                                        <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                            @foreach(explode("\n", $descEn) as $line)
+                                                @if(trim($line))
+                                                    @if(str_starts_with(trim($line), '-'))
+                                                        <li style="margin-bottom: 4px;">{{ trim(substr(trim($line), 1)) }}</li>
+                                                    @else
+                                                        <li style="list-style-type: none; margin-left: -20px;">{{ $line }}</li>
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        {!! nl2br(e($descEn)) !!}
+                                    @endif
+                                </div>
+                            </div>
+
+                            @if($experience->technologies || $experience->technologies_en)
                                 <div class="exp-tags">
-                                    @foreach($experience->technologies as $tech)
-                                        <span class="exp-tag">{{ $tech }}</span>
-                                    @endforeach
+                                    <div class="lang-id" style="display: block;">
+                                        @if($experience->technologies)
+                                            @foreach($experience->technologies as $tech)
+                                                <span class="exp-tag">{{ $tech }}</span>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                    <div class="lang-en" style="display: none;">
+                                        @if($experience->technologies_en)
+                                            @foreach($experience->technologies_en as $tech)
+                                                <span class="exp-tag">{{ $tech }}</span>
+                                            @endforeach
+                                         @elseif($experience->technologies)
+                                            {{-- Fallback --}}
+                                            @foreach($experience->technologies as $tech)
+                                                <span class="exp-tag">{{ $tech }}</span>
+                                            @endforeach
+                                        @endif
+                                    </div>
                                 </div>
                             @endif
                         </div>
@@ -188,9 +338,20 @@
             </div>
             @endforeach
         </div>
+        
+        @if($experiences->count() > 3)
+        <div class="view-more-container" style="text-align: center; margin-top: 40px; position: relative; z-index: 10;">
+            <button id="view-more-btn" class="view-more-btn">
+                <span>View More Experience</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+        @endif
     </div>
 </section>
+@endif
 
+@if(in_array('education', $visibleSections))
 <!-- Education Section -->
 <section class="education-section-landing" id="education">
     <div class="container">
@@ -224,9 +385,23 @@
                                     <span class="exp-type">• GPA {{ $education->gpa }}</span>
                                 @endif
                             </p>
-                            <p class="exp-description">
-                                {{ $education->description }}
-                            </p>
+                            <div class="exp-description">
+                                @if(Str::contains($education->description, '- '))
+                                    <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                        @foreach(explode("\n", $education->description) as $line)
+                                            @if(trim($line))
+                                                @if(str_starts_with(trim($line), '-'))
+                                                    <li style="margin-bottom: 4px;">{{ trim(substr(trim($line), 1)) }}</li>
+                                                @else
+                                                    <li style="list-style-type: none; margin-left: -20px;">{{ $line }}</li>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    {!! nl2br(e($education->description)) !!}
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="exp-timeline-center">
@@ -273,7 +448,9 @@
         </div>
     </div>
 </section>
+@endif
 
+@if(in_array('quote', $visibleSections))
 <!-- Quote Section -->
 <section class="quote-section-landing">
     <div class="container">
@@ -283,7 +460,9 @@
         </div>
     </div>
 </section>
+@endif
 
+@if(in_array('tech_stack', $visibleSections))
 <!-- Tech Stack -->
 <section class="tech-stack" id="tech">
     <div class="container">
@@ -300,7 +479,118 @@
         </div>
     </div>
 </section>
+@endif
 
+@if(in_array('skills', $visibleSections))
+<!-- Additional Information Section -->
+<section class="additional-info-section" style="padding: 0 0 60px 0;">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" style="margin-bottom: 40px;">Additional Information</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Technical Skills -->
+            <div class="info-column">
+                <h3 class="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-orange-500 inline-block pb-2">Technical Skills</h3>
+                <ul class="space-y-4">
+                    @forelse($technicalSkills as $skill)
+                        <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <div>
+                                <strong class="text-gray-900">
+                                    <span class="lang-id" data-display="inline">{{ $skill->category }}</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">{{ $skill->category_en ?: $skill->category }}</span>
+                                    :
+                                </strong>
+                                <span class="text-gray-700">
+                                    <span class="lang-id" data-display="inline">{{ $skill->items }}</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">{{ $skill->items_en ?: $skill->items }}</span>
+                                </span>
+                            </div>
+                        </li>
+                    @empty
+                        <li class="text-gray-500">No technical skills added yet.</li>
+                    @endforelse
+                </ul>
+            </div>
+
+            <!-- Soft Skills -->
+            <div class="info-column mt-8 md:mt-0">
+                <h3 class="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-orange-500 inline-block pb-2">Soft Skills</h3>
+                <ul class="space-y-4">
+                    @forelse($softSkills as $skill)
+                         <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-star"></i></span>
+                            <div>
+                                @if($skill->category)
+                                    <strong class="text-gray-900">
+                                        <span class="lang-id" data-display="inline">{{ $skill->category }}</span>
+                                        <span class="lang-en" style="display: none;" data-display="inline">{{ $skill->category_en ?: $skill->category }}</span>
+                                        {{ ($skill->items || $skill->items_en) ? ':' : '' }}
+                                    </strong>
+                                @endif
+                                @if($skill->items)
+                                    <span class="text-gray-700">
+                                        <span class="lang-id" data-display="inline">{{ $skill->items }}</span>
+                                        <span class="lang-en" style="display: none;" data-display="inline">{{ $skill->items_en ?: $skill->items }}</span>
+                                    </span>
+                                @endif
+                            </div>
+                        </li>
+                    @empty
+                        <li class="text-gray-500">No soft skills added yet.</li>
+                    @endforelse
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+
+@if(in_array('certifications', $visibleSections))
+<!-- Certifications Section -->
+<section class="certifications-section" style="padding: 0 0 60px 0;">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" style="margin-bottom: 40px;" data-translate="section_certifications">Certifications</h2>
+        
+        <div class="certifications-grid">
+            @forelse($certifications as $cert)
+                <div class="certification-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="cert-content">
+                        <h3 class="cert-name">
+                            <span class="lang-id" data-display="block">{{ $cert->name }}</span>
+                            <span class="lang-en" style="display: none;" data-display="block">{{ $cert->name_en ?: $cert->name }}</span>
+                        </h3>
+                        <p class="cert-issuer">
+                            <span class="lang-id" data-display="block">{{ $cert->issuer }}</span>
+                            <span class="lang-en" style="display: none;" data-display="block">{{ $cert->issuer_en ?: $cert->issuer }}</span>
+                        </p>
+                        <p class="cert-date">
+                            Issued: {{ $cert->formatted_issued_at }}
+                            @if($cert->expiration_date)
+                                • Expires: {{ $cert->formatted_expiration_date }}
+                            @endif
+                        </p>
+                        @if($cert->credential_url)
+                            <a href="{{ $cert->credential_url }}" target="_blank" class="cert-link">
+                                Show Credential <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            @empty
+                <div class="text-center text-muted col-span-full">
+                    No certifications added yet.
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+@endif
+
+@if(in_array('projects', $visibleSections))
 <!-- Projects Section -->
 <section class="selected-work" id="projects">
     <div class="container">
@@ -353,7 +643,9 @@
 
     </div>
 </section>
+@endif
 
+@if(in_array('contact', $visibleSections))
 <!-- Contact Section -->
 <section class="contact-section-landing" id="contact">
     <div class="container">
@@ -366,7 +658,9 @@
         </div>
     </div>
 </section>
+@endif
 
+@if(in_array('social', $visibleSections))
 <!-- Find Me On Section -->
 <section class="find-me-section-wrapper" id="contact-social">
     <div class="container">
@@ -471,6 +765,8 @@
         </div>
     </div>
 </section>
+@endif
+{{-- Close all remaining open conditionals from section visibility --}}
 
 <!-- Contact Form Section -->
 @endsection
@@ -699,6 +995,39 @@ document.querySelectorAll('.exp-card, .exp-badge').forEach(el => {
     el.addEventListener('mouseleave', () => {
         el.classList.remove('hover-animate');
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const viewMoreBtn = document.getElementById('view-more-btn');
+    if (viewMoreBtn) {
+        viewMoreBtn.addEventListener('click', function() {
+            const hiddenItems = document.querySelectorAll('.exp-hidden-item');
+            const isExpanded = this.classList.contains('active');
+            const btnText = this.querySelector('span');
+            
+            if (isExpanded) {
+                // Collapse
+                window.location.href = '#experience'; 
+                setTimeout(() => {
+                    hiddenItems.forEach(item => {
+                        item.style.display = 'none';
+                        item.classList.remove('fade-in-item');
+                    });
+                    this.classList.remove('active');
+                    btnText.textContent = 'View More Experience';
+                }, 100);
+            } else {
+                // Expand
+                hiddenItems.forEach((item, index) => {
+                    item.style.display = 'grid'; // FIXED: Restore grid layout
+                    item.style.animationDelay = `${index * 0.1}s`;
+                    item.classList.add('fade-in-item');
+                });
+                this.classList.add('active');
+                btnText.textContent = 'View Less Experience';
+            }
+        });
+    }
 });
 </script>
 @endpush
@@ -1116,5 +1445,154 @@ document.querySelectorAll('.exp-card, .exp-badge').forEach(el => {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1) !important;
     transition: transform 0.3s ease, box-shadow 0.3s ease !important;
 }
+
+    .exp-hidden-item {
+        display: none;
+    }
+    
+    .view-more-btn {
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .view-more-btn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.4);
+        background-color: #1a1a1a;
+    }
+    
+    .view-more-btn:active {
+        transform: translateY(-1px);
+    }
+    
+    .view-more-btn i {
+        transition: transform 0.4s ease;
+    }
+    
+    .view-more-btn.active i {
+        transform: rotate(180deg);
+    }
+    
+    .fade-in-item {
+        animation: fadeInSlide 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInSlide {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Certifications Section Styles */
+    .certifications-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 24px;
+        padding: 0 10px;
+    }
+
+    .certification-card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 24px;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .certification-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        border-color: #5FCECE;
+    }
+
+    .cert-icon {
+        background: rgba(95, 206, 206, 0.1);
+        color: #5FCECE;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+
+    .cert-content {
+        flex: 1;
+    }
+
+    .cert-name {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 4px;
+        line-height: 1.3;
+        margin-top: -2px;
+    }
+
+    .cert-issuer {
+        font-size: 14px;
+        color: #4b5563;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .cert-date {
+        font-size: 13px;
+        color: #9ca3af;
+        margin-bottom: 12px;
+    }
+
+    .cert-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: #5FCECE;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .cert-link:hover {
+        color: #42b2b2;
+        text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+        .certifications-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .certification-card {
+            padding: 20px;
+        }
+
+        .cert-name {
+            font-size: 16px;
+        }
+    }
 </style>
 @endpush

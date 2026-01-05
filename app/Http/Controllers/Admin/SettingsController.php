@@ -19,6 +19,7 @@ class SettingsController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'website_title' => 'nullable|string|max:255',
             'title' => 'nullable|string|max:255',
             'bio' => 'nullable|string',
             'bio_id' => 'nullable|string',
@@ -80,5 +81,23 @@ class SettingsController extends Controller
         $profile->update(['photo' => $path]);
 
         return back()->with('success', 'Foto profil berhasil diupload!');
+    }
+
+    public function uploadFavicon(Request $request)
+    {
+        $request->validate([
+            'favicon' => 'required|file|mimes:ico,png,jpg,svg|max:1024',
+        ]);
+
+        $profile = Profile::first();
+
+        if ($profile->favicon) {
+            Storage::disk('public')->delete($profile->favicon);
+        }
+
+        $path = $request->file('favicon')->store('favicon', 'public');
+        $profile->update(['favicon' => $path]);
+
+        return back()->with('success', 'Favicon berhasil diupload!');
     }
 }

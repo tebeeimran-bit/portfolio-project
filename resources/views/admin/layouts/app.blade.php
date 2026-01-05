@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     @stack('styles')
 </head>
@@ -34,11 +35,11 @@
                 </a>
                 <a href="{{ route('admin.projects.index') }}" class="nav-item {{ request()->routeIs('admin.projects.*') ? 'active' : '' }}">
                     <i class="fas fa-folder"></i>
-                    <span>Kelola Proyek</span>
+                    <span>Projects</span>
                 </a>
                 <a href="{{ route('admin.experiences.index') }}" class="nav-item {{ request()->routeIs('admin.experiences.*') ? 'active' : '' }}">
                     <i class="fas fa-briefcase"></i>
-                    <span>Pengalaman</span>
+                    <span>Experience</span>
                 </a>
                 <a href="{{ route('admin.education.index') }}" class="nav-item {{ request()->routeIs('admin.education.*') ? 'active' : '' }}">
                     <i class="fas fa-graduation-cap"></i>
@@ -48,13 +49,25 @@
                     <i class="fas fa-code"></i>
                     <span>Tech Stack</span>
                 </a>
+                <a href="{{ route('admin.skills.index') }}" class="nav-item {{ request()->routeIs('admin.skills.*') ? 'active' : '' }}">
+                    <i class="fas fa-list-ul"></i>
+                    <span>Skills</span>
+                </a>
+                <a href="{{ route('admin.certifications.index') }}" class="nav-item {{ request()->routeIs('admin.certifications.*') ? 'active' : '' }}">
+                    <i class="fas fa-certificate"></i>
+                    <span>Certifications</span>
+                </a>
                 <a href="{{ route('admin.settings') }}" class="nav-item {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
                     <i class="fas fa-cog"></i>
-                    <span>Pengaturan</span>
+                    <span>Settings</span>
                 </a>
                 <a href="{{ route('admin.visitors.index') }}" class="nav-item {{ request()->routeIs('admin.visitors.index') ? 'active' : '' }}">
                     <i class="fas fa-users"></i>
                     <span>Visitor Logs</span>
+                </a>
+                <a href="{{ route('admin.cv.index') }}" class="nav-item {{ request()->routeIs('admin.cv.*') ? 'active' : '' }}">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Generate CV</span>
                 </a>
             </nav>
 
@@ -75,7 +88,7 @@
             <header class="admin-topbar">
                 <div class="topbar-search">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Cari proyek...">
+                    <input type="text" placeholder="Search projects...">
                 </div>
                 <div class="topbar-actions">
                     <div class="topbar-user">
@@ -106,6 +119,16 @@
         </main>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr(".datepicker", {
+                dateFormat: "Y-m-d",
+                allowInput: true, // Allows typing
+                placeholder: "YYYY-MM-DD"
+            });
+        });
+    </script>
     @stack('scripts')
 </body>
 </html>

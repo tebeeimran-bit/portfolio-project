@@ -1,120 +1,169 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard - Section Management')
 
 @section('content')
 <div class="page-header">
-    <div class="page-header-row">
-        <div>
-            <h1>Daftar Proyek</h1>
-            <p>Kelola konten portofolio Anda</p>
-        </div>
-        <a href="{{ route('admin.projects.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Tambah Proyek
-        </a>
+    <div class="header-title">
+        <h1>Section Management</h1>
+        <p>Show or hide sections on your homepage</p>
     </div>
 </div>
 
-<!-- Stats -->
-<div class="stats-grid">
-    <div class="stat-card">
-        <div class="stat-icon blue">
-            <i class="fas fa-folder"></i>
-        </div>
-        <div class="stat-content">
-            <h3>Total Proyek</h3>
-            <div class="stat-value">{{ $totalProjects }}</div>
-            <div class="stat-change">
-                <i class="fas fa-arrow-up"></i> +2 bulan ini
+<div class="card">
+    <div class="card-body">
+        <form action="{{ route('admin.update-sections') }}" method="POST">
+            @csrf
+            <div class="section-toggle-grid">
+                @foreach($sections as $key => $label)
+                <div class="section-toggle-item">
+                    <div class="toggle-content">
+                        <div class="section-info">
+                            <i class="fas fa-grip-vertical section-drag-handle"></i>
+                            <h4 class="section-name">{{ $label }}</h4>
+                            <span class="section-key">{{ $key }}</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" name="visible_sections[]" value="{{ $key }}" 
+                                {{ in_array($key, $visibleSections) ? 'checked' : '' }}>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                @endforeach
             </div>
-        </div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-icon green">
-            <i class="fas fa-check-circle"></i>
-        </div>
-        <div class="stat-content">
-            <h3>Publikasi</h3>
-            <div class="stat-value">{{ $publishedProjects }}</div>
-            <div class="stat-change">Aktif di portofolio</div>
-        </div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-icon orange">
-            <i class="fas fa-edit"></i>
-        </div>
-        <div class="stat-content">
-            <h3>Draft</h3>
-            <div class="stat-value">{{ $draftProjects }}</div>
-            <div class="stat-change">Belum dipublikasi</div>
-        </div>
+
+            <div class="form-actions text-right mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 
-<!-- Recent Projects Table -->
-<div class="data-table">
-    <table>
-        <thead>
-            <tr>
-                <th>Thumbnail</th>
-                <th>Judul Proyek</th>
-                <th>Kategori</th>
-                <th>Tanggal</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($recentProjects as $project)
-                <tr>
-                    <td>
-                        <div class="table-thumbnail">
-                            @if($project->thumbnail)
-                                <img src="{{ asset('storage/' . $project->thumbnail) }}" alt="{{ $project->title }}">
-                            @else
-                                <div class="table-thumbnail-placeholder">
-                                    <i class="fas fa-image"></i>
-                                </div>
-                            @endif
-                        </div>
-                    </td>
-                    <td>
-                        <div class="table-title">{{ $project->title }}</div>
-                        <div class="table-subtitle">{{ $project->client ?? 'Personal Project' }}</div>
-                    </td>
-                    <td>
-                        <span class="category-badge">{{ $project->category->name ?? 'Uncategorized' }}</span>
-                    </td>
-                    <td>{{ $project->created_at->format('d M Y') }}</td>
-                    <td>
-                        <span class="status-badge {{ $project->status }}">
-                            {{ $project->status == 'published' ? 'Published' : 'Draft' }}
-                        </span>
-                    </td>
-                    <td>
-                        <div class="table-actions">
-                            <a href="{{ route('admin.projects.edit', $project) }}" class="action-btn" title="Edit">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" style="display: inline;" onsubmit="return confirm('Yakin ingin menghapus proyek ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="action-btn danger" title="Delete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" style="text-align: center; padding: 40px; color: var(--text-secondary);">
-                        <i class="fas fa-folder-open" style="font-size: 32px; margin-bottom: 12px; display: block; opacity: 0.5;"></i>
-                        Belum ada proyek. <a href="{{ route('admin.projects.create') }}" style="color: var(--primary);">Tambah proyek pertama</a>
-                    </td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+@push('styles')
+<style>
+    .section-toggle-grid {
+        display: grid;
+        gap: 12px;
+    }
+
+    .section-toggle-item {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+
+    .section-toggle-item:hover {
+        border-color: #5FCECE;
+        box-shadow: 0 4px 12px rgba(95, 206, 206, 0.1);
+    }
+
+    .toggle-content {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+    }
+
+    .section-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+    }
+
+    .section-drag-handle {
+        color: #9ca3af;
+        cursor: grab;
+        font-size: 16px;
+    }
+
+    .section-name {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1f2937;
+        margin: 0;
+    }
+
+    .section-key {
+        font-size: 12px;
+        color: #6b7280;
+        background: #e5e7eb;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-family: 'Courier New', monospace;
+    }
+
+    /* Toggle Switch Styles */
+    .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 54px;
+        height: 28px;
+        flex-shrink: 0;
+    }
+
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #cbd5e0;
+        transition: 0.3s;
+        border-radius: 28px;
+    }
+
+    .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.3s;
+        border-radius: 50%;
+    }
+
+    input:checked + .toggle-slider {
+        background-color: #5FCECE;
+    }
+
+    input:checked + .toggle-slider:before {
+        transform: translateX(26px);
+    }
+
+    input:focus + .toggle-slider {
+        box-shadow: 0 0 1px #5FCECE;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .toggle-content {
+            padding: 16px;
+        }
+
+        .section-name {
+            font-size: 14px;
+        }
+
+        .section-key {
+            display: none;
+        }
+    }
+</style>
+@endpush
 @endsection

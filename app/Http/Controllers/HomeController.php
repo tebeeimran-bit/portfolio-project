@@ -17,7 +17,7 @@ class HomeController extends Controller
         $categories = Category::all();
         
         // Only show featured experiences
-        $experiences = Experience::featured()->orderBy('order')->get();
+        $experiences = Experience::featured()->orderBy('start_date', 'desc')->get();
         
         $educations = Education::orderBy('order')->orderBy('start_date', 'desc')->get();
         
@@ -40,6 +40,19 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
-        return view('home', compact('profile', 'categories', 'experiences', 'educations', 'technologies', 'featuredProjects', 'allProjects'));
+        // Fetch skills
+        $technicalSkills = \App\Models\Skill::where('type', 'technical')->orderBy('order')->get();
+        $softSkills = \App\Models\Skill::where('type', 'soft')->orderBy('order')->get();
+
+        // Fetch certifications
+        $certifications = \App\Models\Certification::orderBy('issued_at', 'desc')->get();
+
+        // Get visible sections (default all visible)
+        $visibleSections = $profile->visible_sections ?? [
+            'hero', 'stats', 'about', 'experience', 'education', 'quote', 
+            'tech_stack', 'skills', 'certifications', 'projects', 'contact', 'social'
+        ];
+
+        return view('home', compact('profile', 'categories', 'experiences', 'educations', 'technologies', 'featuredProjects', 'allProjects', 'technicalSkills', 'softSkills', 'certifications', 'visibleSections'));
     }
 }

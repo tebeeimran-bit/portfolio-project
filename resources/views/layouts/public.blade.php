@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio - Creative Developer based in Jakarta">
-    <title>@yield('title', 'Portfolio')</title>
+    @php
+        $settings = \App\Models\Profile::first();
+    @endphp
+    <title>{{ $settings->website_title ?? 'Portfolio' }} @yield('title_suffix')</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    @if($settings && $settings->favicon)
+        <link rel="icon" href="{{ asset('storage/' . $settings->favicon) }}">
+    @else
+        <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    @endif
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -340,6 +347,7 @@
                 'section_exp': 'Pengalaman Kerja',
                 'section_edu': 'Pendidikan',
                 'section_tech': 'Teknologi Yang Saya Gunakan',
+                'section_certifications': 'Sertifikasi',
                 'section_projects': 'Proyek Unggulan',
                 'section_contact': 'Hubungi Saya',
                 'contact_title': 'Mari Bekerja <span class="highlight">Sama</span>',
@@ -419,6 +427,23 @@
                     element.innerHTML = content;
                 }
             });
+
+            // Toggle Class-based Dual Language Content (New System)
+            if (lang === 'id') {
+                document.querySelectorAll('.lang-id').forEach(el => {
+                    el.style.display = el.getAttribute('data-display') || 'block';
+                });
+                document.querySelectorAll('.lang-en').forEach(el => {
+                    el.style.display = 'none';
+                });
+            } else {
+                document.querySelectorAll('.lang-en').forEach(el => {
+                    el.style.display = el.getAttribute('data-display') || 'block';
+                });
+                document.querySelectorAll('.lang-id').forEach(el => {
+                    el.style.display = 'none';
+                });
+            }
             
             console.log('Language set to: ' + lang);
         }

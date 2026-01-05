@@ -19,6 +19,7 @@ class Education extends Model
         'gpa',
         'order',
         'is_current',
+        'date_format',
     ];
 
     protected $casts = [

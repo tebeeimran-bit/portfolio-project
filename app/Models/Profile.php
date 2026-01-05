@@ -11,11 +11,13 @@ class Profile extends Model
 
     protected $fillable = [
         'name',
+        'website_title',
         'title',
         'bio',
         'bio_id',
         'story',
         'photo',
+        'favicon',
         'email',
         'phone',
         'whatsapp',
@@ -27,10 +29,12 @@ class Profile extends Model
         'awards',
         'hobbies',
         'social_links',
+        'visible_sections',
     ];
 
     protected $casts = [
         'hobbies' => 'array',
         'social_links' => 'array',
+        'visible_sections' => 'array',
     ];
 }

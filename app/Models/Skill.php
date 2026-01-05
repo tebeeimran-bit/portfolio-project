@@ -10,8 +10,11 @@ class Skill extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'percentage',
+        'category',
+        'category_en',
+        'items',
+        'items_en',
+        'type',
         'order',
     ];
 }
