@@ -1,6 +1,16 @@
-CREATE TABLE "migrations" ("id" integer primary key autoincrement not null, "migration" varchar not null, "batch" integer not null);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-INSERT INTO "migrations" ("id", "migration", "batch") VALUES 
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE `migrations` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `migration` TEXT NOT NULL  ,
+  `batch` INT NOT NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES 
 ('1', '0001_01_01_000000_create_users_table', '1'),
 ('2', '0001_01_01_000001_create_cache_table', '1'),
 ('3', '0001_01_01_000002_create_jobs_table', '1'),
@@ -29,147 +39,276 @@ INSERT INTO "migrations" ("id", "migration", "batch") VALUES
 ('27', '2026_01_03_215141_create_certifications_table', '19'),
 ('28', '2026_01_03_215951_add_visible_sections_to_profiles_table', '20');
 
-CREATE TABLE "users" ("id" integer primary key autoincrement not null, "name" varchar not null, "email" varchar not null, "email_verified_at" datetime, "password" varchar not null, "remember_token" varchar, "created_at" datetime, "updated_at" datetime);
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` TEXT NOT NULL  ,
+  `email` TEXT NOT NULL  ,
+  `email_verified_at` DATETIME NULL  ,
+  `password` TEXT NOT NULL  ,
+  `remember_token` TEXT NULL  ,
+  `created_at` DATETIME NULL  ,
+  `updated_at` DATETIME NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO "users" ("id", "name", "email", "email_verified_at", "password", "remember_token", "created_at", "updated_at") VALUES 
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES 
 ('1', 'Admin', 'admin@portfolio.com', NULL, '$2y$12$02W4LimAb8mhi/vyFrjwCukMdTtcI5vW6QhIkNyEQQiPsq.41X6HW', NULL, '2025-12-25 15:00:26', '2025-12-25 15:00:26'),
 ('2', 'Test Admin', 'test@example.com', NULL, '$2y$12$Jr/vg0LTsQllmrSVwzfS2eaZX48Ybv1AeCwVwhbAh/LYlLOJWO2gq', NULL, '2025-12-30 12:54:56', '2025-12-30 12:54:56'),
 ('3', 'Admin', 'admin@example.com', NULL, '$2y$12$VQZI.2uCG2iNmUpTP2Xnve1sQ5y.2a2y5b2Qt8aojw0z6yvNMZLLu', NULL, '2025-12-30 18:00:22', '2025-12-30 18:00:22'),
 ('4', 'Admin Test', 'admin@admin.com', NULL, '$2y$12$EG1NzBgN9Ye7vsYKEsrV1u8yROhHQ2GOG7EYwFoBCaSROTYmzw0ZS', NULL, '2026-01-03 22:23:35', '2026-01-03 22:23:35');
 
-CREATE TABLE "password_reset_tokens" ("email" varchar not null, "token" varchar not null, "created_at" datetime, primary key ("email"));
+DROP TABLE IF EXISTS `password_reset_tokens`;
+CREATE TABLE `password_reset_tokens` (
+  `email` TEXT NOT NULL  ,
+  `token` TEXT NOT NULL  ,
+  `created_at` DATETIME NULL  ,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE "sessions" ("id" varchar not null, "user_id" integer, "ip_address" varchar, "user_agent" text, "payload" text not null, "last_activity" integer not null, primary key ("id"));
+DROP TABLE IF EXISTS `sessions`;
+CREATE TABLE `sessions` (
+  `id` TEXT NOT NULL  ,
+  `user_id` INT NULL  ,
+  `ip_address` TEXT NULL  ,
+  `user_agent` TEXT NULL  ,
+  `payload` TEXT NOT NULL  ,
+  `last_activity` INT NOT NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO "sessions" ("id", "user_id", "ip_address", "user_agent", "payload", "last_activity") VALUES 
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES 
 ('ibkXygkI29QhhnAfrkPA11ItClQLhbFxZRO5gfDh', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiczU4azYzYXNGUWx6MWxib0NNNDZ5cmFGcEtURGpsRXo3ZHd4SnowMCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9jdi9wcmV2aWV3IjtzOjU6InJvdXRlIjtzOjE2OiJhZG1pbi5jdi5wcmV2aWV3Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', '1767483403'),
 ('dTHOOBXVAWHMAnL6kRerSqIwURGL70mjIaePdM61', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiR3dQekNBS3NEM3ZIbUZ1bUZ2QW5EMUl5QjJmbHB3TVAyWnlFNHNINiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2FkbWluIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6NDt9', '1767483381'),
 ('GuHfxmvly7apADtUQwYMqjoxJJJ4mHGpbKGnyFBK', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWUllNEpDVlZkRkg2RE1jNkNNVGhBdlJrQnJLWld1RUdlRXI2Q0dYMCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', '1767585302'),
 ('PD11mkfFzRcI2FVMiPJcaqR9KimkhYHwy2RnZ3rD', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNUpSQ0laZWQzSG1CMENqUTVwd04wdmdFZzFlU1ZqZUlWS0owa3hqMCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', '1767585302');
 
-CREATE TABLE "cache" ("key" varchar not null, "value" text not null, "expiration" integer not null, primary key ("key"));
+DROP TABLE IF EXISTS `cache`;
+CREATE TABLE `cache` (
+  `key` TEXT NOT NULL  ,
+  `value` TEXT NOT NULL  ,
+  `expiration` INT NOT NULL  ,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO "cache" ("key", "value", "expiration") VALUES 
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES 
 ('laravel-cache-admin@gmail.com|127.0.0.1:timer', 'i:1767478764;', '1767478764'),
 ('laravel-cache-admin@gmail.com|127.0.0.1', 'i:1;', '1767478764'),
 ('laravel-cache-admin@admin.com|127.0.0.1:timer', 'i:1767478794;', '1767478795'),
 ('laravel-cache-admin@admin.com|127.0.0.1', 'i:1;', '1767478795');
 
-CREATE TABLE "cache_locks" ("key" varchar not null, "owner" varchar not null, "expiration" integer not null, primary key ("key"));
+DROP TABLE IF EXISTS `cache_locks`;
+CREATE TABLE `cache_locks` (
+  `key` TEXT NOT NULL  ,
+  `owner` TEXT NOT NULL  ,
+  `expiration` INT NOT NULL  ,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE "jobs" ("id" integer primary key autoincrement not null, "queue" varchar not null, "payload" text not null, "attempts" integer not null, "reserved_at" integer, "available_at" integer not null, "created_at" integer not null);
+DROP TABLE IF EXISTS `jobs`;
+CREATE TABLE `jobs` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `queue` TEXT NOT NULL  ,
+  `payload` TEXT NOT NULL  ,
+  `attempts` INT NOT NULL  ,
+  `reserved_at` INT NULL  ,
+  `available_at` INT NOT NULL  ,
+  `created_at` INT NOT NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE "job_batches" ("id" varchar not null, "name" varchar not null, "total_jobs" integer not null, "pending_jobs" integer not null, "failed_jobs" integer not null, "failed_job_ids" text not null, "options" text, "cancelled_at" integer, "created_at" integer not null, "finished_at" integer, primary key ("id"));
+DROP TABLE IF EXISTS `job_batches`;
+CREATE TABLE `job_batches` (
+  `id` TEXT NOT NULL  ,
+  `name` TEXT NOT NULL  ,
+  `total_jobs` INT NOT NULL  ,
+  `pending_jobs` INT NOT NULL  ,
+  `failed_jobs` INT NOT NULL  ,
+  `failed_job_ids` TEXT NOT NULL  ,
+  `options` TEXT NULL  ,
+  `cancelled_at` INT NULL  ,
+  `created_at` INT NOT NULL  ,
+  `finished_at` INT NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE "failed_jobs" ("id" integer primary key autoincrement not null, "uuid" varchar not null, "connection" text not null, "queue" text not null, "payload" text not null, "exception" text not null, "failed_at" datetime not null default CURRENT_TIMESTAMP);
+DROP TABLE IF EXISTS `failed_jobs`;
+CREATE TABLE `failed_jobs` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `uuid` TEXT NOT NULL  ,
+  `connection` TEXT NOT NULL  ,
+  `queue` TEXT NOT NULL  ,
+  `payload` TEXT NOT NULL  ,
+  `exception` TEXT NOT NULL  ,
+  `failed_at` DATETIME NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE "categories" ("id" integer primary key autoincrement not null, "name" varchar not null, "slug" varchar not null, "color" varchar not null default '#00b4d8', "icon" varchar, "created_at" datetime, "updated_at" datetime);
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` TEXT NOT NULL  ,
+  `slug` TEXT NOT NULL  ,
+  `color` TEXT NOT NULL  DEFAULT 'DEFAULT #00b4d8',
+  `icon` TEXT NULL  ,
+  `created_at` DATETIME NULL  ,
+  `updated_at` DATETIME NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO "categories" ("id", "name", "slug", "color", "icon", "created_at", "updated_at") VALUES 
+INSERT INTO `categories` (`id`, `name`, `slug`, `color`, `icon`, `created_at`, `updated_at`) VALUES 
 ('1', 'UI/UX Design', 'ui-ux-design', '#00b4d8', NULL, '2025-12-25 15:00:26', '2025-12-25 15:00:26'),
 ('2', 'Web Development', 'web-development', '#48bb78', NULL, '2025-12-25 15:00:26', '2025-12-25 15:00:26'),
 ('3', 'Mobile Apps', 'mobile-apps', '#ed8936', NULL, '2025-12-25 15:00:26', '2025-12-25 15:00:26'),
 ('4', 'Branding', 'branding', '#9f7aea', NULL, '2025-12-25 15:00:26', '2025-12-25 15:00:26'),
 ('5', 'Dashboard', 'dashboard', '#f56565', NULL, '2025-12-25 15:00:26', '2025-12-25 15:00:26');
 
-CREATE TABLE "projects" ("id" integer primary key autoincrement not null, "category_id" integer not null, "title" varchar not null, "slug" varchar not null, "client" varchar, "role" varchar, "timeline" varchar, "description" text, "challenge" text, "solution" text, "thumbnail" varchar, "images" text, "tags" text, "tools" text, "key_improvements" text, "live_url" varchar, "code_url" varchar, "status" varchar check ("status" in ('published', 'draft')) not null default 'draft', "featured" tinyint(1) not null default '0', "created_at" datetime, "updated_at" datetime, foreign key("category_id") references "categories"("id") on delete cascade);
+DROP TABLE IF EXISTS `projects`;
+CREATE TABLE `projects` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `category_id` INT NOT NULL  ,
+  `title` TEXT NOT NULL  ,
+  `slug` TEXT NOT NULL  ,
+  `client` TEXT NULL  ,
+  `role` TEXT NULL  ,
+  `timeline` TEXT NULL  ,
+  `description` TEXT NULL  ,
+  `challenge` TEXT NULL  ,
+  `solution` TEXT NULL  ,
+  `thumbnail` TEXT NULL  ,
+  `images` TEXT NULL  ,
+  `tags` TEXT NULL  ,
+  `tools` TEXT NULL  ,
+  `key_improvements` TEXT NULL  ,
+  `live_url` TEXT NULL  ,
+  `code_url` TEXT NULL  ,
+  `status` TEXT NOT NULL  DEFAULT 'DEFAULT draft',
+  `featured` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  `created_at` DATETIME NULL  ,
+  `updated_at` DATETIME NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO "projects" ("id", "category_id", "title", "slug", "client", "role", "timeline", "description", "challenge", "solution", "thumbnail", "images", "tags", "tools", "key_improvements", "live_url", "code_url", "status", "featured", "created_at", "updated_at") VALUES 
-('2', '2', 'Budget & Investment System', 'budget-investment-system', 'Dharma Electrindo Mfg.', 'Full Stack Developer', '8 Weeks', 'Real-time data visualization tool for tracking investments and market trends.', '1. Budgeting masih manual dan data tersebar di banyak file, sehingga rawan salah input dan sulit dikontrol.
+INSERT INTO `projects` (`id`, `category_id`, `title`, `slug`, `client`, `role`, `timeline`, `description`, `challenge`, `solution`, `thumbnail`, `images`, `tags`, `tools`, `key_improvements`, `live_url`, `code_url`, `status`, `featured`, `created_at`, `updated_at`) VALUES 
+('2', '2', 'Budget & Investment System', 'budget-investment-system', 'Dharma Electrindo Mfg.', 'Full Stack Developer', '8 Weeks', 'Real-time data visualization tool for tracking investments and market trends.', '1. Budgeting masih manual dan data tersebar di banyak file, sehingga rawan salah input dan sulit dikontrol.\r\n\r\n2. Monitoring rencana vs realisasi terlambat, sehingga overbudget sering ketahuan belakangan.\r\n\r\n3. Alur approval Purchase Request (PR) tidak jelas dan bisa berjalan tanpa cek ketersediaan anggaran.\r\n\r\n4. Budget proyek/investasi tidak terhubung dengan transaksi, sehingga sulit memantau biaya per proyek.\r\n\r\n5. Transparansi dan kebutuhan audit lemah karena jejak approval serta dokumen pendukung tidak rapi.\r\n\r\n6. Master data (kategori, akun, vendor, proyek) tidak konsisten sehingga laporan jadi kurang akurat.', '1. Sediakan modul Budget Plan terpusat untuk input anggaran, revisi terkontrol, dan data rapi dalam satu sistem.\r\n\r\n2. Buat dashboard yang menampilkan Total Budget, Total Realisasi, dan Sisa Anggaran secara real-time.\r\n\r\n3. Terapkan modul Purchase Request dengan workflow status yang jelas dan validasi budget sebelum disetujui.\r\n\r\n4. Gunakan modul Projects untuk menghubungkan budget proyek + PR + realisasi agar monitoring per proyek mudah.\r\n\r\n5. Aktifkan audit trail (log aktivitas) dan penyimpanan lampiran/dokumen sebagai bukti proses.\r\n\r\n6. Buat modul Master Data dengan input berbasis pilihan (dropdown) agar data seragam dan laporan konsisten.', 'projects/Xq4dW4CrhjjAgGYhiHXcy00Y6ILwn6YHy3IDJChE.png', NULL, '["Web App","Laravel"]', '["Laravel","MySql"]', NULL, 'https://bis.tubagus.my.id', NULL, 'published', '1', '2025-12-25 15:00:27', '2025-12-29 20:51:36');
 
-2. Monitoring rencana vs realisasi terlambat, sehingga overbudget sering ketahuan belakangan.
+DROP TABLE IF EXISTS `experiences`;
+CREATE TABLE `experiences` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `title` TEXT NOT NULL  ,
+  `company` TEXT NOT NULL  ,
+  `type` TEXT NULL  ,
+  `start_date` TEXT NOT NULL  ,
+  `end_date` TEXT NULL  ,
+  `description` TEXT NULL  ,
+  `technologies` TEXT NULL  ,
+  `order` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  `created_at` DATETIME NULL  ,
+  `updated_at` DATETIME NULL  ,
+  `location` TEXT NULL  ,
+  `featured` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  `date_format` TEXT NOT NULL  DEFAULT 'DEFAULT F Y',
+  `title_en` TEXT NULL  ,
+  `company_en` TEXT NULL  ,
+  `location_en` TEXT NULL  ,
+  `description_en` TEXT NULL  ,
+  `technologies_en` TEXT NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-3. Alur approval Purchase Request (PR) tidak jelas dan bisa berjalan tanpa cek ketersediaan anggaran.
+INSERT INTO `experiences` (`id`, `title`, `company`, `type`, `start_date`, `end_date`, `description`, `technologies`, `order`, `created_at`, `updated_at`, `location`, `featured`, `date_format`, `title_en`, `company_en`, `location_en`, `description_en`, `technologies_en`) VALUES 
+('1', 'Issuing', 'PT. Sumber Alfaria Trijaya Tbk.', 'Contract', '2018-01-01 00:00:00', '2020-01-01 00:00:00', '- Mengecek barang masuk dan keluar\r\n- Menyiapkan barang untuk distribusi\r\n- Membuat administrasi pengiriman dan penerimaan barang', '["Pallet Mover","Inventory Management","Teamwork"]', '6', '2025-12-25 15:00:26', '2026-01-03 21:47:41', 'Bogor, Indonesia', '1', 'Y', 'Issuing', 'PT. Sumber Alfaria Trijaya Tbk.', 'Bogor, Indonesia', '- Checking items in and out\r\n- Preparing goods for distribution\r\n- Making administration of the delivery and receipt of goods', '["Pallet Mover","Inventory Management","Teamwork"]'),
+('2', 'Admin Produksi', 'PT. Mitra Metal Perkasa', 'Contract', '2020-03-01 00:00:00', '2021-12-31 00:00:00', '- Menginput data hasil produksi harian ke dalam sistem database.\r\n- Membuat laporan produksi harian, mingguan, dan bulanan.\r\n- Memastikan ketersediaan bahan baku untuk kelancaran proses produksi.\r\n- Berkoordinasi dengan tim gudang dan PPIC terkait jadwal produksi.\r\n- Mengarsipkan dokumen-dokumen produksi (Surat Jalan, DO, Invoice) dengan rapi.\r\n- Memonitor stok barang jadi (finish goods) dan barang dalam proses (WIP).', '["WMS","SAP","Excel (Termasuk pivot table & VBA Excel)"]', '2', '2025-12-25 15:00:26', '2026-01-03 21:47:11', 'Karawang, Indonesia', '1', 'Y', 'Production Admin', 'PT. Mitra Metal Perkasa', 'Karawang, Indonesia', '- Inputting daily production data into the database system.\r\n- Create daily, weekly, and monthly production reports.\r\n- Ensure the availability of raw materials for a smooth production process.\r\n- Coordinate with warehouse and PPIC teams regarding production schedules.\r\n- Filing production documents (Road Letters, DOs, Invoices) neatly.\r\n- Monitor the stock of finished goods (finish goods) and in-process goods (WIP).', '["WMS","SAP","Excel (Includes Excel pivot table & VBA)"]'),
+('3', 'Checker Warehouse (Raw Material)', 'PT. Mayora Indah Tbk.', 'Contract', '2021-06-01 00:00:00', '2022-02-28 00:00:00', '- Mengelola administrasi keluar masuk barang dan inventory.\r\n- Membuat laporan stok gudang secara berkala.\r\n- Menginput data penerimaan dan pengiriman barang ke sistem.\r\n- Mencocokkan data fisik barang dengan catatan sistem (Stock Opname).\r\n- Berkoordinasi dengan tim logistik untuk pengiriman barang.', '["WMS","SAP","Pallet Movers","Forklift","Inventory Management","Supply Chain Management"]', '3', '2025-12-25 15:00:26', '2026-01-03 21:46:50', 'Balaraja, Indonesia', '1', 'Y', 'Checker Warehouse (Raw Material)', 'PT. Mayora Indah Tbk.', 'Balaraja, Indonesia', '- Managing administration in and out of goods and inventory.\r\n- Generate warehouse stock reports on a regular basis.\r\n- Inputting data on the receipt and delivery of goods to the system.\r\n- Match the physical data of the goods with the system records (Stock Opname).\r\n- Coordinate with the logistics team for the delivery of goods.', '["WMS","SAP","Pallet Movers","Forklift","Inventory Management","Supply Chain Management"]'),
+('4', 'Staff Admin', 'PT. Furnimart Mebelindo Sakti', 'Contract', '2022-01-01 00:00:00', '2023-01-01 00:00:00', '- Mengontrol keluar masuk barang serta membuat surat jalan dan delivery order.\r\n- Melakukan input data stok ke dalam sistem inventory (SAP/WMS/Excel).\r\n- Melakukan stock opname rutin untuk memastikan akurasi data fisik dan sistem.\r\n- Mengarsipkan dokumen logistik dan surat jalan dengan rapi.\r\n- Berkoordinasi dengan tim helper dan supir untuk jadwal pengiriman.', '["Odoo","Excel (Termasuk pivot table & VBA Excel)","Sales","Editing"]', '3', '2026-01-03 20:11:28', '2026-01-03 21:46:16', 'Bogor, Indonesia', '1', 'Y', 'Staff Admin', 'PT. Furnimart Mebelindo Sakti', 'Bogor, Indonesia', '- Controlling the entry and exit of goods and making road mail and delivery orders.\r\n- Input stock data into the inventory system (SAP/WMS/Excel).\r\n- Conduct routine stock taking to ensure the accuracy of physical and system data.\r\n- Filing logistical documents and road letters neatly.\r\n- Coordinate with helper and driver teams for delivery schedules.', '["Odoo","Excel (Includes Excel pivot table & VBA)","Sales","Editing"]'),
+('5', 'Admin Document Control', 'PT. Dharma Electrindo Mfg', 'Contract', '2023-08-08 00:00:00', '2023-11-01 00:00:00', '- Menerima, mencatat, dan mendistribusikan dokumen proyek\r\n- Menyimpan dokumen sesuai standar perusahaan dan customer\r\n- Menjaga kerahasiaan dokumen serta memastikan akses hanya pihak berwenang', '["SAP","Excel (Termasuk pivot table & VBA Excel)","PowerPoint","Kerjasama tim"]', '2', '2026-01-03 20:23:32', '2026-01-03 21:45:50', 'Bekasi, Indonesia', '1', 'F Y', 'Admin Document Control', 'PT. Dharma Electrindo Mfg', 'Bekasi, Indonesia', '- Receiving, recording, and distributing project documents\r\n- Store documents according to company and customer standards\r\n- Maintain the confidentiality of documents and ensure access only by the authorities', '["SAP","Excel (Includes Excel pivot table & VBA)","Powerpoint","Teamwork"]'),
+('6', 'Costing Staff', 'PT. Dharma Electrindo Mfg', 'Contract', '2023-11-01 00:00:00', NULL, '- Menginput dan menghitung biaya produksi (COGM)\r\n- Membuat permintaan part baru untuk Procurement & Vendor\r\n- Memantau data estimasi part serupa\r\n- Memastikan perhitungan biaya akurat\r\n- Menyusun laporan ringkasan biaya produksi', '["SAP","Costing","COGM Analysis","Excel (Termasuk pivot table & VBA Excel)","Microsoft Word","PowerPoint","Kerjasama tim","Disiplin","Problem solving","Kreativitas"]', '1', '2026-01-03 20:32:10', '2026-01-03 21:45:28', 'Bekasi, Indonesia', '1', 'F Y', 'Costing Staff', 'PT. Dharma Electrindo Mfg', 'Bekasi, Indonesia', '- Inputting and calculating production costs (COGM)\r\n- Make new part requests for Procurement & Vendors\r\n- Monitor similar part estimation data\r\n- Ensure accurate cost calculations\r\n- Prepare a summary report of production costs', '["SAP","Costing","COGM Analysis","Excel (Includes Excel pivot table & VBA)","Microsoft Word","Powerpoint","Teamwork","Discipline","Problem-Solving","Creativity"]');
 
-4. Budget proyek/investasi tidak terhubung dengan transaksi, sehingga sulit memantau biaya per proyek.
+DROP TABLE IF EXISTS `profiles`;
+CREATE TABLE `profiles` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` TEXT NOT NULL  ,
+  `title` TEXT NULL  ,
+  `bio` TEXT NULL  ,
+  `story` TEXT NULL  ,
+  `photo` TEXT NULL  ,
+  `email` TEXT NULL  ,
+  `phone` TEXT NULL  ,
+  `whatsapp` TEXT NULL  ,
+  `location` TEXT NULL  ,
+  `cv_file` TEXT NULL  ,
+  `years_experience` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  `total_projects` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  `happy_clients` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  `awards` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  `hobbies` TEXT NULL  ,
+  `social_links` TEXT NULL  ,
+  `created_at` DATETIME NULL  ,
+  `updated_at` DATETIME NULL  ,
+  `bio_id` TEXT NULL  ,
+  `website_title` TEXT NULL  ,
+  `favicon` TEXT NULL  ,
+  `visible_sections` TEXT NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-5. Transparansi dan kebutuhan audit lemah karena jejak approval serta dokumen pendukung tidak rapi.
+INSERT INTO `profiles` (`id`, `name`, `title`, `bio`, `story`, `photo`, `email`, `phone`, `whatsapp`, `location`, `cv_file`, `years_experience`, `total_projects`, `happy_clients`, `awards`, `hobbies`, `social_links`, `created_at`, `updated_at`, `bio_id`, `website_title`, `favicon`, `visible_sections`) VALUES 
+('1', 'Tubagus Imran', 'Full-Stack Developer, Mobile Developer', 'Hi, I’m a Creative Developer based in Jakarta. I specialize in building accessible, pixel-perfect user interfaces that balance form and function. I care about clean design systems, smooth interactions, and maintainable front-end code—calm, clean, consistent.', 'I started coding when I was 15, building simple WordPress themes. What began as a curiosity quickly turned into a career obsession. Today, I specialize in the MERN stack and Python. I believe code is just a tool to solve human problems, and I strive to make those solutions as elegant as possible.', NULL, 'tebeeimran@gmail.com', '085789710340', '6285789710340', 'Cikarang Utara, Kabupaten Bekasi, Jawa Barat', 'cv/EINn5YjRgSGZjdT4fos3PYnHHntXTCs0hhA44kF6.pdf', '5', '40', '25', '12', '[{"name":"Photography","icon":"camera"},{"name":"Gaming","icon":"gamepad"},{"name":"Hiking","icon":"mountain"},{"name":"Reading","icon":"book"}]', '{"linkedin":"https:\\/\\/www.linkedin.com\\/in\\/tubagus-imran\\/","github":"https:\\/\\/github.com\\/tebeeimran-bit","instagram":"https:\\/\\/www.instagram.com\\/tebeimran\\/","facebook":"https:\\/\\/www.facebook.com\\/tb.imran19\\/"}', '2025-12-25 15:00:26', '2026-01-03 22:37:18', 'Creative Developer berbasis di Jakarta, berfokus pada pembuatan antarmuka yang aksesibel dan presisi hingga detail. Mengutamakan keseimbangan antara estetika dan fungsi, dengan perhatian pada design system yang rapi, interaksi yang halus, serta kode front-end yang mudah dirawat—tenang, rapi, konsisten.', 'Tubagus | New Portfolio', NULL, '["hero","stats","about","experience","education","quote","tech_stack","skills","projects","contact","social"]');
 
-6. Master data (kategori, akun, vendor, proyek) tidak konsisten sehingga laporan jadi kurang akurat.', '1. Sediakan modul Budget Plan terpusat untuk input anggaran, revisi terkontrol, dan data rapi dalam satu sistem.
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE `messages` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` TEXT NOT NULL  ,
+  `email` TEXT NOT NULL  ,
+  `subject` TEXT NULL  ,
+  `message` TEXT NOT NULL  ,
+  `is_read` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  `created_at` DATETIME NULL  ,
+  `updated_at` DATETIME NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-2. Buat dashboard yang menampilkan Total Budget, Total Realisasi, dan Sisa Anggaran secara real-time.
-
-3. Terapkan modul Purchase Request dengan workflow status yang jelas dan validasi budget sebelum disetujui.
-
-4. Gunakan modul Projects untuk menghubungkan budget proyek + PR + realisasi agar monitoring per proyek mudah.
-
-5. Aktifkan audit trail (log aktivitas) dan penyimpanan lampiran/dokumen sebagai bukti proses.
-
-6. Buat modul Master Data dengan input berbasis pilihan (dropdown) agar data seragam dan laporan konsisten.', 'projects/Xq4dW4CrhjjAgGYhiHXcy00Y6ILwn6YHy3IDJChE.png', NULL, '["Web App","Laravel"]', '["Laravel","MySql"]', NULL, 'https://bis.tubagus.my.id', NULL, 'published', '1', '2025-12-25 15:00:27', '2025-12-29 20:51:36');
-
-CREATE TABLE "experiences" ("id" integer primary key autoincrement not null, "title" varchar not null, "company" varchar not null, "type" varchar, "start_date" date not null, "end_date" date, "description" text, "technologies" text, "order" integer not null default '0', "created_at" datetime, "updated_at" datetime, "location" varchar, "featured" tinyint(1) not null default '0', "date_format" varchar not null default 'F Y', "title_en" varchar, "company_en" varchar, "location_en" varchar, "description_en" text, "technologies_en" text);
-
-INSERT INTO "experiences" ("id", "title", "company", "type", "start_date", "end_date", "description", "technologies", "order", "created_at", "updated_at", "location", "featured", "date_format", "title_en", "company_en", "location_en", "description_en", "technologies_en") VALUES 
-('1', 'Issuing', 'PT. Sumber Alfaria Trijaya Tbk.', 'Contract', '2018-01-01 00:00:00', '2020-01-01 00:00:00', '- Mengecek barang masuk dan keluar
-- Menyiapkan barang untuk distribusi
-- Membuat administrasi pengiriman dan penerimaan barang', '["Pallet Mover","Inventory Management","Teamwork"]', '6', '2025-12-25 15:00:26', '2026-01-03 21:47:41', 'Bogor, Indonesia', '1', 'Y', 'Issuing', 'PT. Sumber Alfaria Trijaya Tbk.', 'Bogor, Indonesia', '- Checking items in and out
-- Preparing goods for distribution
-- Making administration of the delivery and receipt of goods', '["Pallet Mover","Inventory Management","Teamwork"]'),
-('2', 'Admin Produksi', 'PT. Mitra Metal Perkasa', 'Contract', '2020-03-01 00:00:00', '2021-12-31 00:00:00', '- Menginput data hasil produksi harian ke dalam sistem database.
-- Membuat laporan produksi harian, mingguan, dan bulanan.
-- Memastikan ketersediaan bahan baku untuk kelancaran proses produksi.
-- Berkoordinasi dengan tim gudang dan PPIC terkait jadwal produksi.
-- Mengarsipkan dokumen-dokumen produksi (Surat Jalan, DO, Invoice) dengan rapi.
-- Memonitor stok barang jadi (finish goods) dan barang dalam proses (WIP).', '["WMS","SAP","Excel (Termasuk pivot table & VBA Excel)"]', '2', '2025-12-25 15:00:26', '2026-01-03 21:47:11', 'Karawang, Indonesia', '1', 'Y', 'Production Admin', 'PT. Mitra Metal Perkasa', 'Karawang, Indonesia', '- Inputting daily production data into the database system.
-- Create daily, weekly, and monthly production reports.
-- Ensure the availability of raw materials for a smooth production process.
-- Coordinate with warehouse and PPIC teams regarding production schedules.
-- Filing production documents (Road Letters, DOs, Invoices) neatly.
-- Monitor the stock of finished goods (finish goods) and in-process goods (WIP).', '["WMS","SAP","Excel (Includes Excel pivot table & VBA)"]'),
-('3', 'Checker Warehouse (Raw Material)', 'PT. Mayora Indah Tbk.', 'Contract', '2021-06-01 00:00:00', '2022-02-28 00:00:00', '- Mengelola administrasi keluar masuk barang dan inventory.
-- Membuat laporan stok gudang secara berkala.
-- Menginput data penerimaan dan pengiriman barang ke sistem.
-- Mencocokkan data fisik barang dengan catatan sistem (Stock Opname).
-- Berkoordinasi dengan tim logistik untuk pengiriman barang.', '["WMS","SAP","Pallet Movers","Forklift","Inventory Management","Supply Chain Management"]', '3', '2025-12-25 15:00:26', '2026-01-03 21:46:50', 'Balaraja, Indonesia', '1', 'Y', 'Checker Warehouse (Raw Material)', 'PT. Mayora Indah Tbk.', 'Balaraja, Indonesia', '- Managing administration in and out of goods and inventory.
-- Generate warehouse stock reports on a regular basis.
-- Inputting data on the receipt and delivery of goods to the system.
-- Match the physical data of the goods with the system records (Stock Opname).
-- Coordinate with the logistics team for the delivery of goods.', '["WMS","SAP","Pallet Movers","Forklift","Inventory Management","Supply Chain Management"]'),
-('4', 'Staff Admin', 'PT. Furnimart Mebelindo Sakti', 'Contract', '2022-01-01 00:00:00', '2023-01-01 00:00:00', '- Mengontrol keluar masuk barang serta membuat surat jalan dan delivery order.
-- Melakukan input data stok ke dalam sistem inventory (SAP/WMS/Excel).
-- Melakukan stock opname rutin untuk memastikan akurasi data fisik dan sistem.
-- Mengarsipkan dokumen logistik dan surat jalan dengan rapi.
-- Berkoordinasi dengan tim helper dan supir untuk jadwal pengiriman.', '["Odoo","Excel (Termasuk pivot table & VBA Excel)","Sales","Editing"]', '3', '2026-01-03 20:11:28', '2026-01-03 21:46:16', 'Bogor, Indonesia', '1', 'Y', 'Staff Admin', 'PT. Furnimart Mebelindo Sakti', 'Bogor, Indonesia', '- Controlling the entry and exit of goods and making road mail and delivery orders.
-- Input stock data into the inventory system (SAP/WMS/Excel).
-- Conduct routine stock taking to ensure the accuracy of physical and system data.
-- Filing logistical documents and road letters neatly.
-- Coordinate with helper and driver teams for delivery schedules.', '["Odoo","Excel (Includes Excel pivot table & VBA)","Sales","Editing"]'),
-('5', 'Admin Document Control', 'PT. Dharma Electrindo Mfg', 'Contract', '2023-08-08 00:00:00', '2023-11-01 00:00:00', '- Menerima, mencatat, dan mendistribusikan dokumen proyek
-- Menyimpan dokumen sesuai standar perusahaan dan customer
-- Menjaga kerahasiaan dokumen serta memastikan akses hanya pihak berwenang', '["SAP","Excel (Termasuk pivot table & VBA Excel)","PowerPoint","Kerjasama tim"]', '2', '2026-01-03 20:23:32', '2026-01-03 21:45:50', 'Bekasi, Indonesia', '1', 'F Y', 'Admin Document Control', 'PT. Dharma Electrindo Mfg', 'Bekasi, Indonesia', '- Receiving, recording, and distributing project documents
-- Store documents according to company and customer standards
-- Maintain the confidentiality of documents and ensure access only by the authorities', '["SAP","Excel (Includes Excel pivot table & VBA)","Powerpoint","Teamwork"]'),
-('6', 'Costing Staff', 'PT. Dharma Electrindo Mfg', 'Contract', '2023-11-01 00:00:00', NULL, '- Menginput dan menghitung biaya produksi (COGM)
-- Membuat permintaan part baru untuk Procurement & Vendor
-- Memantau data estimasi part serupa
-- Memastikan perhitungan biaya akurat
-- Menyusun laporan ringkasan biaya produksi', '["SAP","Costing","COGM Analysis","Excel (Termasuk pivot table & VBA Excel)","Microsoft Word","PowerPoint","Kerjasama tim","Disiplin","Problem solving","Kreativitas"]', '1', '2026-01-03 20:32:10', '2026-01-03 21:45:28', 'Bekasi, Indonesia', '1', 'F Y', 'Costing Staff', 'PT. Dharma Electrindo Mfg', 'Bekasi, Indonesia', '- Inputting and calculating production costs (COGM)
-- Make new part requests for Procurement & Vendors
-- Monitor similar part estimation data
-- Ensure accurate cost calculations
-- Prepare a summary report of production costs', '["SAP","Costing","COGM Analysis","Excel (Includes Excel pivot table & VBA)","Microsoft Word","Powerpoint","Teamwork","Discipline","Problem-Solving","Creativity"]');
-
-CREATE TABLE "profiles" ("id" integer primary key autoincrement not null, "name" varchar not null, "title" varchar, "bio" text, "story" text, "photo" varchar, "email" varchar, "phone" varchar, "whatsapp" varchar, "location" varchar, "cv_file" varchar, "years_experience" integer not null default '0', "total_projects" integer not null default '0', "happy_clients" integer not null default '0', "awards" integer not null default '0', "hobbies" text, "social_links" text, "created_at" datetime, "updated_at" datetime, "bio_id" text, "website_title" varchar, "favicon" varchar, "visible_sections" text);
-
-INSERT INTO "profiles" ("id", "name", "title", "bio", "story", "photo", "email", "phone", "whatsapp", "location", "cv_file", "years_experience", "total_projects", "happy_clients", "awards", "hobbies", "social_links", "created_at", "updated_at", "bio_id", "website_title", "favicon", "visible_sections") VALUES 
-('1', 'Tubagus Imran', 'Full-Stack Developer, Mobile Developer', 'Hi, I’m a Creative Developer based in Jakarta. I specialize in building accessible, pixel-perfect user interfaces that balance form and function. I care about clean design systems, smooth interactions, and maintainable front-end code—calm, clean, consistent.', 'I started coding when I was 15, building simple WordPress themes. What began as a curiosity quickly turned into a career obsession. Today, I specialize in the MERN stack and Python. I believe code is just a tool to solve human problems, and I strive to make those solutions as elegant as possible.', NULL, 'tebeeimran@gmail.com', '085789710340', '6285789710340', 'Cikarang Utara, Kabupaten Bekasi, Jawa Barat', 'cv/EINn5YjRgSGZjdT4fos3PYnHHntXTCs0hhA44kF6.pdf', '5', '40', '25', '12', '[{"name":"Photography","icon":"camera"},{"name":"Gaming","icon":"gamepad"},{"name":"Hiking","icon":"mountain"},{"name":"Reading","icon":"book"}]', '{"linkedin":"https:\/\/www.linkedin.com\/in\/tubagus-imran\/","github":"https:\/\/github.com\/tebeeimran-bit","instagram":"https:\/\/www.instagram.com\/tebeimran\/","facebook":"https:\/\/www.facebook.com\/tb.imran19\/"}', '2025-12-25 15:00:26', '2026-01-03 22:37:18', 'Creative Developer berbasis di Jakarta, berfokus pada pembuatan antarmuka yang aksesibel dan presisi hingga detail. Mengutamakan keseimbangan antara estetika dan fungsi, dengan perhatian pada design system yang rapi, interaksi yang halus, serta kode front-end yang mudah dirawat—tenang, rapi, konsisten.', 'Tubagus | New Portfolio', NULL, '["hero","stats","about","experience","education","quote","tech_stack","skills","projects","contact","social"]');
-
-CREATE TABLE "messages" ("id" integer primary key autoincrement not null, "name" varchar not null, "email" varchar not null, "subject" varchar, "message" text not null, "is_read" tinyint(1) not null default '0', "created_at" datetime, "updated_at" datetime);
-
-INSERT INTO "messages" ("id", "name", "email", "subject", "message", "is_read", "created_at", "updated_at") VALUES 
+INSERT INTO `messages` (`id`, `name`, `email`, `subject`, `message`, `is_read`, `created_at`, `updated_at`) VALUES 
 ('1', 'John Doe', 'john@example.com', 'Project Inquiry', 'Hi, I am interested in working with you on a new e-commerce project. Would love to discuss further.', '0', '2025-12-25 15:00:27', '2025-12-25 15:00:27'),
 ('2', 'Jane Smith', 'jane@example.com', 'Collaboration Opportunity', 'Hello! I saw your portfolio and would love to collaborate on an upcoming mobile app project.', '1', '2025-12-25 15:00:27', '2025-12-25 15:00:27'),
 ('3', 'Mike Johnson', 'mike@company.com', 'Full-time Position', 'We have an opening for a senior developer role and your profile caught our attention. Would you be interested?', '0', '2025-12-25 15:00:27', '2025-12-25 15:00:27');
 
-CREATE TABLE "education" ("id" integer primary key autoincrement not null, "institution" varchar not null, "degree" varchar not null, "start_date" date not null, "end_date" date, "description" text, "gpa" varchar, "order" integer not null default '0', "created_at" datetime, "updated_at" datetime, "location" varchar, "is_current" tinyint(1) not null default '0', "date_format" varchar not null default 'Y');
+DROP TABLE IF EXISTS `education`;
+CREATE TABLE `education` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `institution` TEXT NOT NULL  ,
+  `degree` TEXT NOT NULL  ,
+  `start_date` TEXT NOT NULL  ,
+  `end_date` TEXT NULL  ,
+  `description` TEXT NULL  ,
+  `gpa` TEXT NULL  ,
+  `order` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  `created_at` DATETIME NULL  ,
+  `updated_at` DATETIME NULL  ,
+  `location` TEXT NULL  ,
+  `is_current` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  `date_format` TEXT NOT NULL  DEFAULT 'DEFAULT Y',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO "education" ("id", "institution", "degree", "start_date", "end_date", "description", "gpa", "order", "created_at", "updated_at", "location", "is_current", "date_format") VALUES 
+INSERT INTO `education` (`id`, `institution`, `degree`, `start_date`, `end_date`, `description`, `gpa`, `order`, `created_at`, `updated_at`, `location`, `is_current`, `date_format`) VALUES 
 ('1', 'POLITEKNIK META INDUSTRI', 'Applied Bachelor (D4), Software Engineering Technology', '2025-01-08 00:00:00', NULL, 'Focused on Software Engineering and Artificial Intelligence. Active in student organizations and completed a thesis on Machine Learning for accessibility.', '-', '1', '2025-12-29 17:30:17', '2026-01-03 18:42:09', 'Cikarang Utara, Jawa Barat, Indonesia', '1', 'Y'),
 ('2', 'MA NEGERI 1 BOGOR', 'IPA', '2015-07-01 00:00:00', '2018-06-01 00:00:00', NULL, '82.9', '2', '2025-12-29 17:30:17', '2025-12-29 19:32:40', 'Bogor, Indonesia', '0', 'Y');
 
-CREATE TABLE "technologies" ("id" integer primary key autoincrement not null, "name" varchar not null, "icon" varchar not null, "order" integer not null default '0', "is_active" tinyint(1) not null default '1', "created_at" datetime, "updated_at" datetime, "featured" tinyint(1) not null default '0');
+DROP TABLE IF EXISTS `technologies`;
+CREATE TABLE `technologies` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` TEXT NOT NULL  ,
+  `icon` TEXT NOT NULL  ,
+  `order` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  `is_active` INT NOT NULL  DEFAULT 'DEFAULT 1',
+  `created_at` DATETIME NULL  ,
+  `updated_at` DATETIME NULL  ,
+  `featured` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO "technologies" ("id", "name", "icon", "order", "is_active", "created_at", "updated_at", "featured") VALUES 
+INSERT INTO `technologies` (`id`, `name`, `icon`, `order`, `is_active`, `created_at`, `updated_at`, `featured`) VALUES 
 ('1', 'JavaScript', 'fab fa-js-square', '1', '1', '2025-12-29 19:49:34', '2025-12-30 13:14:51', '1'),
 ('2', 'PHP', 'fab fa-php', '2', '1', '2025-12-29 19:49:34', '2025-12-30 13:15:03', '1'),
 ('3', 'Python', 'fab fa-python', '3', '1', '2025-12-29 19:49:34', '2025-12-30 13:15:11', '1'),
@@ -181,9 +320,22 @@ INSERT INTO "technologies" ("id", "name", "icon", "order", "is_active", "created
 ('9', 'Docker', 'fab fa-docker', '9', '1', '2025-12-29 19:49:34', '2025-12-30 13:16:09', '1'),
 ('10', 'MySQL', 'fas fa-database', '10', '1', '2025-12-29 19:49:34', '2025-12-30 13:16:00', '1');
 
-CREATE TABLE "visitor_logs" ("id" integer primary key autoincrement not null, "ip_address" varchar, "url" varchar, "method" varchar, "user_agent" text, "created_at" datetime, "updated_at" datetime, "country" varchar, "city" varchar, "region" varchar);
+DROP TABLE IF EXISTS `visitor_logs`;
+CREATE TABLE `visitor_logs` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `ip_address` TEXT NULL  ,
+  `url` TEXT NULL  ,
+  `method` TEXT NULL  ,
+  `user_agent` TEXT NULL  ,
+  `created_at` DATETIME NULL  ,
+  `updated_at` DATETIME NULL  ,
+  `country` TEXT NULL  ,
+  `city` TEXT NULL  ,
+  `region` TEXT NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO "visitor_logs" ("id", "ip_address", "url", "method", "user_agent", "created_at", "updated_at", "country", "city", "region") VALUES 
+INSERT INTO `visitor_logs` (`id`, `ip_address`, `url`, `method`, `user_agent`, `created_at`, `updated_at`, `country`, `city`, `region`) VALUES 
 ('1', '127.0.0.1', 'http://127.0.0.1:8000', 'GET', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-30 17:46:32', '2025-12-30 17:46:32', NULL, NULL, NULL),
 ('2', '127.0.0.1', 'http://127.0.0.1:8000/projects/budget-investment-system', 'GET', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-30 17:46:56', '2025-12-30 17:46:56', NULL, NULL, NULL),
 ('3', '127.0.0.1', 'http://127.0.0.1:8000/login', 'GET', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-30 17:48:57', '2025-12-30 17:48:57', NULL, NULL, NULL),
@@ -513,9 +665,21 @@ INSERT INTO "visitor_logs" ("id", "ip_address", "url", "method", "user_agent", "
 ('327', '127.0.0.1', 'http://127.0.0.1:8000', 'GET', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', '2026-01-05 03:55:02', '2026-01-05 03:55:02', 'Localhost', 'Local Machine', 'Dev Env'),
 ('328', '127.0.0.1', 'http://127.0.0.1:8000', 'GET', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', '2026-01-05 03:55:02', '2026-01-05 03:55:02', 'Localhost', 'Local Machine', 'Dev Env');
 
-CREATE TABLE "skills" ("id" integer primary key autoincrement not null, "category" varchar, "items" text, "type" varchar not null default ('technical'), "order" integer not null default ('0'), "created_at" datetime, "updated_at" datetime, "category_en" varchar, "items_en" text);
+DROP TABLE IF EXISTS `skills`;
+CREATE TABLE `skills` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `category` TEXT NULL  ,
+  `items` TEXT NULL  ,
+  `type` TEXT NOT NULL  DEFAULT 'DEFAULT technical',
+  `order` INT NOT NULL  DEFAULT 'DEFAULT 0',
+  `created_at` DATETIME NULL  ,
+  `updated_at` DATETIME NULL  ,
+  `category_en` TEXT NULL  ,
+  `items_en` TEXT NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO "skills" ("id", "category", "items", "type", "order", "created_at", "updated_at", "category_en", "items_en") VALUES 
+INSERT INTO `skills` (`id`, `category`, `items`, `type`, `order`, `created_at`, `updated_at`, `category_en`, `items_en`) VALUES 
 ('1', 'Web Development', 'HTML, CSS, JavaScript, PHP, LARAVEL', 'technical', '1', '2026-01-03 18:52:31', '2026-01-03 18:53:14', NULL, NULL),
 ('2', 'Networking & System', 'Microtic Configuration, Linux Debian, LAN/WAN Setup, Computer Troubleshooting', 'technical', '2', '2026-01-03 18:54:20', '2026-01-03 18:54:20', NULL, NULL),
 ('3', 'Hardware & Software Maintenance', 'Perakitan dan instalasi hardware maupun software', 'technical', '3', '2026-01-03 18:56:53', '2026-01-03 21:34:45', 'Hardware & Software Maintenance', 'Assembly and installation of hardware and software'),
@@ -531,5 +695,21 @@ INSERT INTO "skills" ("id", "category", "items", "type", "order", "created_at", 
 ('14', 'Kreativitas', NULL, 'soft', '5', '2026-01-03 19:51:03', '2026-01-03 21:33:31', 'Creativity', NULL),
 ('15', 'Manajemen Waktu', NULL, 'soft', '7', '2026-01-03 19:51:27', '2026-01-03 21:33:51', 'Time Management', NULL);
 
-CREATE TABLE "certifications" ("id" integer primary key autoincrement not null, "name" varchar not null, "name_en" varchar, "issuer" varchar not null, "issuer_en" varchar, "issued_at" date not null, "expiration_date" date, "credential_url" varchar, "description" text, "description_en" text, "created_at" datetime, "updated_at" datetime);
+DROP TABLE IF EXISTS `certifications`;
+CREATE TABLE `certifications` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` TEXT NOT NULL  ,
+  `name_en` TEXT NULL  ,
+  `issuer` TEXT NOT NULL  ,
+  `issuer_en` TEXT NULL  ,
+  `issued_at` TEXT NOT NULL  ,
+  `expiration_date` TEXT NULL  ,
+  `credential_url` TEXT NULL  ,
+  `description` TEXT NULL  ,
+  `description_en` TEXT NULL  ,
+  `created_at` DATETIME NULL  ,
+  `updated_at` DATETIME NULL  ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+COMMIT;
