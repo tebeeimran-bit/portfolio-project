@@ -68,10 +68,10 @@ class DatabaseSeeder extends Seeder
 
         // Create skills
         $skills = [
-            ['name' => 'Frontend (React, Vue, Tailwind)', 'percentage' => 95, 'order' => 1],
-            ['name' => 'Backend (Node.js, Python/Django)', 'percentage' => 85, 'order' => 2],
-            ['name' => 'Database (PostgreSQL, MongoDB)', 'percentage' => 80, 'order' => 3],
-            ['name' => 'UI/UX Design (Figma)', 'percentage' => 75, 'order' => 4],
+            ['category' => 'Frontend', 'items' => 'React, Vue, Tailwind', 'type' => 'technical', 'order' => 1],
+            ['category' => 'Backend', 'items' => 'Node.js, Python, Django', 'type' => 'technical', 'order' => 2],
+            ['category' => 'Database', 'items' => 'PostgreSQL, MongoDB', 'type' => 'technical', 'order' => 3],
+            ['category' => 'UI/UX Design', 'items' => 'Figma', 'type' => 'technical', 'order' => 4],
         ];
 
         foreach ($skills as $skill) {
