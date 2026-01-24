@@ -8,30 +8,8 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function index(Request $request)
-    {
-        $query = Project::with('category')->published();
+    // Index method removed as it referenced a missing view and had no route.
 
-        // Search
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%")
-                  ->orWhere('client', 'like', "%{$search}%");
-            });
-        }
-
-        // Filter by category
-        if ($request->filled('category') && $request->category !== 'all') {
-            $query->where('category_id', $request->category);
-        }
-
-        $projects = $query->latest()->paginate(9);
-        $categories = Category::all();
-
-        return view('projects.index', compact('projects', 'categories'));
-    }
 
     public function show($slug)
     {

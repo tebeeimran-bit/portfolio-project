@@ -26,6 +26,8 @@ class Experience extends Model
         'order',
         'featured',
         'date_format',
+        'show_description',
+        'show_tags',
     ];
 
     protected $casts = [
@@ -34,6 +36,8 @@ class Experience extends Model
         'technologies' => 'array',
         'technologies_en' => 'array',
         'featured' => 'boolean',
+        'show_description' => 'boolean',
+        'show_tags' => 'boolean',
     ];
 
     public function scopeFeatured($query)

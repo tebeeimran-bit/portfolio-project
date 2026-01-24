@@ -14,9 +14,9 @@
     <div class="card-body">
         <form action="{{ route('admin.update-sections') }}" method="POST">
             @csrf
-            <div class="section-toggle-grid">
+            <div class="section-toggle-grid" id="sectionsGrid">
                 @foreach($sections as $key => $label)
-                <div class="section-toggle-item">
+                <div class="section-toggle-item" data-id="{{ $key }}">
                     <div class="toggle-content">
                         <div class="section-info">
                             <i class="fas fa-grip-vertical section-drag-handle"></i>
@@ -32,6 +32,7 @@
                 </div>
                 @endforeach
             </div>
+            <input type="hidden" name="section_order" id="sectionOrderInput">
 
             <div class="form-actions text-right mt-4">
                 <button type="submit" class="btn btn-primary">
@@ -41,6 +42,8 @@
         </form>
     </div>
 </div>
+
+
 
 @push('styles')
 <style>
@@ -53,8 +56,21 @@
         background: #f9fafb;
         border: 1px solid #e5e7eb;
         border-radius: 12px;
-        transition: all 0.3s ease;
+        transition: all 0.3s ease, transform 0.2s;
         overflow: hidden;
+    }
+
+    .section-toggle-item.sortable-ghost {
+        opacity: 0.4;
+        background: #f3f4f6;
+        border-style: dashed;
+    }
+
+    .section-toggle-item.sortable-drag {
+        background: #ffffff;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        transform: scale(1.02);
+        z-index: 100;
     }
 
     .section-toggle-item:hover {
@@ -81,6 +97,11 @@
         color: #9ca3af;
         cursor: grab;
         font-size: 16px;
+        padding: 4px; /* Larger hit area */
+    }
+    
+    .section-drag-handle:hover {
+        color: #4b5563;
     }
 
     .section-name {
@@ -165,5 +186,31 @@
         }
     }
 </style>
+@endpush
+
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var el = document.getElementById('sectionsGrid');
+        var sortable = Sortable.create(el, {
+            handle: '.section-drag-handle',
+            animation: 150,
+            ghostClass: 'sortable-ghost',
+            dragClass: 'sortable-drag',
+            onEnd: function (evt) {
+                updateOrder();
+            }
+        });
+
+        function updateOrder() {
+            var order = sortable.toArray(); // Uses data-id
+            document.getElementById('sectionOrderInput').value = JSON.stringify(order);
+        }
+
+        // Initialize order on load
+        updateOrder();
+    });
+</script>
 @endpush
 @endsection

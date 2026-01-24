@@ -48,9 +48,13 @@ class ExperienceController extends Controller
             'company_en' => 'nullable|string|max:255',
             'location_en' => 'nullable|string|max:255',
             'description_en' => 'nullable|string',
+            'show_description' => 'nullable|boolean',
+            'show_tags' => 'nullable|boolean',
         ]);
 
         $validated['featured'] = $request->has('featured');
+        $validated['show_description'] = $request->has('show_description');
+        $validated['show_tags'] = $request->has('show_tags');
 
         if ($request->filled('technologies')) {
             $validated['technologies'] = array_map('trim', explode(',', $request->input('technologies')));
@@ -96,9 +100,13 @@ class ExperienceController extends Controller
             'company_en' => 'nullable|string|max:255',
             'location_en' => 'nullable|string|max:255',
             'description_en' => 'nullable|string',
+            'show_description' => 'nullable|boolean',
+            'show_tags' => 'nullable|boolean',
         ]);
 
         $validated['featured'] = $request->has('featured');
+        $validated['show_description'] = $request->has('show_description');
+        $validated['show_tags'] = $request->has('show_tags');
 
         if ($request->filled('technologies')) {
             $validated['technologies'] = array_map('trim', explode(',', $request->input('technologies')));
@@ -110,6 +118,7 @@ class ExperienceController extends Controller
             $validated['technologies_en'] = array_map('trim', explode(',', $request->input('technologies_en')));
         } else {
             $validated['technologies_en'] = null;
+        
         }
 
         $experience->update($validated);

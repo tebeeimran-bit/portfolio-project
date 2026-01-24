@@ -99,6 +99,69 @@
             </div>
 
             <div class="form-section">
+                <h3>Career Aspiration & Milestones</h3>
+                
+                <div class="form-group">
+                    <label for="career_aspiration">Career Aspiration (EN)</label>
+                    <textarea id="career_aspiration" name="career_aspiration" class="form-control" rows="3" placeholder="Describe your career aspirations...">{{ old('career_aspiration', $profile->career_aspiration ?? '') }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="career_aspiration_id">Career Aspiration (ID)</label>
+                    <textarea id="career_aspiration_id" name="career_aspiration_id" class="form-control" rows="3" placeholder="Deskripsikan aspirasi karir Anda...">{{ old('career_aspiration_id', $profile->career_aspiration_id ?? '') }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Milestones</label>
+                    <div id="milestones-container">
+                        @php
+                            $milestones = old('career_milestones', $profile->career_milestones ?? []);
+                        @endphp
+                        @foreach($milestones as $index => $milestone)
+                            <div class="milestone-item form-row align-items-end mb-3" data-index="{{ $index }}">
+                                <div class="form-group col-md-2">
+                                    <label>Year</label>
+                                    <input type="text" name="career_milestones[{{ $index }}][year]" class="form-control" value="{{ $milestone['year'] ?? '' }}" placeholder="2024">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Title</label>
+                                    <input type="text" name="career_milestones[{{ $index }}][title]" class="form-control" value="{{ $milestone['title'] ?? '' }}" placeholder="Tech Lead">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Description</label>
+                                    <input type="text" name="career_milestones[{{ $index }}][description]" class="form-control" value="{{ $milestone['description'] ?? '' }}" placeholder="Achieved goal...">
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <button type="button" class="btn btn-danger btn-sm remove-milestone"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <button type="button" id="add-milestone" class="btn btn-secondary btn-sm mt-2"><i class="fas fa-plus"></i> Add Milestone</button>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Pengaturan Tombol Homepage</h3>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="d-flex align-items-center" style="gap: 10px; cursor: pointer;">
+                            <input type="checkbox" name="show_cv_button" value="1" {{ old('show_cv_button', $profile->show_cv_button ?? true) ? 'checked' : '' }} style="width: 20px; height: 20px;">
+                            <span>Tampilkan Tombol "Unduh CV"</span>
+                        </label>
+                        <small class="text-muted d-block mt-1">Jika dicentang, tombol Unduh CV akan muncul di Hero section.</small>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="d-flex align-items-center" style="gap: 10px; cursor: pointer;">
+                            <input type="checkbox" name="show_contact_button" value="1" {{ old('show_contact_button', $profile->show_contact_button ?? true) ? 'checked' : '' }} style="width: 20px; height: 20px;">
+                            <span>Tampilkan Tombol "Hubungi Saya"</span>
+                        </label>
+                        <small class="text-muted d-block mt-1">Jika dicentang, tombol Hubungi Saya akan muncul di Hero section.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
                 <h3>Statistik</h3>
                 
                 <div class="form-row">
@@ -199,3 +262,45 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('milestones-container');
+        const addButton = document.getElementById('add-milestone');
+        
+        addButton.addEventListener('click', function() {
+            const index = container.children.length;
+            const template = `
+                <div class="milestone-item form-row align-items-end mb-3" data-index="${index}">
+                    <div class="form-group col-md-2">
+                        <label>Year</label>
+                        <input type="text" name="career_milestones[${index}][year]" class="form-control" placeholder="2024">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Title</label>
+                        <input type="text" name="career_milestones[${index}][title]" class="form-control" placeholder="Tech Lead">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Description</label>
+                        <input type="text" name="career_milestones[${index}][description]" class="form-control" placeholder="Achieved goal...">
+                    </div>
+                    <div class="form-group col-md-1">
+                        <button type="button" class="btn btn-danger btn-sm remove-milestone"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', template);
+        });
+
+        container.addEventListener('click', function(e) {
+            if (e.target.closest('.remove-milestone')) {
+                e.target.closest('.milestone-item').remove();
+                // Re-index inputs? Not strictly necessary if backend handles indices loosely, 
+                // but good practice if using array index-based validation. 
+                // For simplified implementation, we'll assume standard POST handling.
+            }
+        });
+    });
+</script>
+@endpush

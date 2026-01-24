@@ -34,10 +34,22 @@ class SettingsController extends Controller
             'awards' => 'nullable|integer|min:0',
             'social_links' => 'nullable|array',
             'social_links.*' => 'nullable|url',
+            'career_aspiration' => 'nullable|string',
+            'career_aspiration_id' => 'nullable|string',
+            'career_milestones' => 'nullable|array',
+            'career_milestones.*.year' => 'required_with:career_milestones|string',
+            'career_milestones.*.title' => 'required_with:career_milestones|string',
+            'career_milestones.*.description' => 'nullable|string',
+            'show_cv_button' => 'nullable|boolean',
+            'show_contact_button' => 'nullable|boolean',
         ]);
 
         $profile = Profile::first();
-        
+
+        // Handle checkboxes (boolean)
+        $validated['show_cv_button'] = $request->has('show_cv_button');
+        $validated['show_contact_button'] = $request->has('show_contact_button');
+
         if ($profile) {
             $profile->update($validated);
         } else {
@@ -54,6 +66,10 @@ class SettingsController extends Controller
         ]);
 
         $profile = Profile::first();
+
+        if (!$profile) {
+            $profile = Profile::create(['name' => 'Administrator']);
+        }
 
         if ($profile->cv_file) {
             Storage::disk('public')->delete($profile->cv_file);
@@ -73,6 +89,10 @@ class SettingsController extends Controller
 
         $profile = Profile::first();
 
+        if (!$profile) {
+            $profile = Profile::create(['name' => 'Administrator']);
+        }
+
         if ($profile->photo) {
             Storage::disk('public')->delete($profile->photo);
         }
@@ -90,6 +110,10 @@ class SettingsController extends Controller
         ]);
 
         $profile = Profile::first();
+
+        if (!$profile) {
+            $profile = Profile::create(['name' => 'Administrator']);
+        }
 
         if ($profile->favicon) {
             Storage::disk('public')->delete($profile->favicon);

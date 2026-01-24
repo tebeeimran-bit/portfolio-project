@@ -72,6 +72,14 @@
                 <input type="checkbox" name="featured" value="1" {{ old('featured', $experience->featured) ? 'checked' : '' }}>
                 <span>Tampilkan di halaman utama (Featured)</span>
             </label>
+            <label class="form-check" style="margin-left: 15px;">
+                <input type="checkbox" name="show_description" value="1" {{ old('show_description', $experience->show_description) ? 'checked' : '' }}>
+                <span>Show Description</span>
+            </label>
+            <label class="form-check" style="margin-left: 15px;">
+                <input type="checkbox" name="show_tags" value="1" {{ old('show_tags', $experience->show_tags) ? 'checked' : '' }}>
+                <span>Show Tags/Badges</span>
+            </label>
         </div>
 
         <div class="form-group">

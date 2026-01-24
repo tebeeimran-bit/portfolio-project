@@ -1,0 +1,3328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio - Creative Developer based in Jakarta">
+        <title>Tubagus | New Portfolio </title>
+    
+    <!-- Favicon -->
+            <link rel="icon" type="image/png" href="http://127.0.0.1:8001/favicon.png">
+        
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Typed.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script type="module" src="http://[::1]:5173/@vite/client"></script><link rel="stylesheet" href="http://[::1]:5173/resources/css/app.css" /><script type="module" src="http://[::1]:5173/resources/js/app.js"></script>    <link rel="stylesheet" href="http://127.0.0.1:8001/css/app.css?v=2.0">
+    <link rel="stylesheet" href="http://127.0.0.1:8001/css/projects.css?v=1.0">
+    <link rel="stylesheet" href="http://127.0.0.1:8001/css/project-detail.css?v=1.0">
+    <style>
+/* Hero Section - Typed.js Styles */
+.hero-name-main {
+    font-size: 4rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+}
+
+.hero-greeting-large {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: 0.5rem;
+}
+
+.hero-typed-text {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+}
+
+.typed-orange {
+    color: #5FCECE;
+    font-weight: 700;
+}
+
+.typed-cursor {
+    color: #5FCECE;
+    font-weight: 400;
+}
+
+/* Scramble Text Effect Styles */
+.scramble-char {
+    color: #5FCECE;
+    opacity: 0.8;
+}
+
+#scramble-text {
+    min-height: 1.2em;
+    display: inline-block;
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+    .hero-name-main {
+        color: #f9fafb;
+    }
+    .hero-greeting-large,
+    .hero-typed-text {
+        color: #d1d5db;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-name-main {
+        font-size: 2.5rem;
+    }
+    .hero-greeting-large,
+    .hero-typed-text {
+        font-size: 1.25rem;
+    }
+}
+
+/* Professional Experience Section - New Design */
+.experience-section-landing {
+    padding: 20px 0;
+}
+
+.education-section-landing {
+    padding: 20px 0;
+}
+
+.section-title-experience {
+    font-size: 4rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin-bottom: 60px;
+}
+
+/* Fade-in animation for section titles */
+.fade-in-title {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-title.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.exp-timeline {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Vertical timeline line */
+.exp-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #d1d5db;
+    transform: translateX(-50%);
+}
+
+/* Row container for each experience */
+.exp-row {
+    display: grid;
+    grid-template-columns: 2fr 50px 2fr;
+    gap: 0;
+    margin-bottom: 80px;
+}
+
+.exp-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Content area (left or right) */
+.exp-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.exp-content.exp-left {
+    align-items: flex-end;
+    text-align: left;
+}
+
+.exp-content.exp-right {
+    align-items: flex-start;
+    text-align: left;
+}
+
+.exp-content.exp-empty {
+    display: block;
+}
+
+/* Timeline center column */
+.exp-timeline-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.exp-timeline-dot {
+    width: 14px;
+    height: 14px;
+    background: #2d3748;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    margin-top: 20px;
+}
+
+/* Badge styling */
+.exp-badge {
+    display: inline-flex;
+    align-items: stretch;
+    background: #2d3748;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.exp-badge-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    min-width: 100px;
+}
+
+.exp-badge-value {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.exp-badge-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-top: 3px;
+}
+
+.exp-badge-divider {
+    width: 1px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Experience card */
+.exp-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.exp-company {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 6px;
+}
+
+.exp-position {
+    font-size: 16px;
+    color: #1f2937;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.exp-type {
+    color: #6b7280;
+    font-weight: 400;
+    margin-left: 4px;
+}
+
+.exp-description {
+    font-size: 15px;
+    color: #6b7280;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.exp-tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #4b5563;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.exp-tag:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    background: #2d3748;
+    color: #ffffff;
+    border-color: #2d3748;
+}
+
+@media (max-width: 900px) {
+    .exp-row {
+        grid-template-columns: 20px 1fr;
+        gap: 16px;
+    }
+    .exp-timeline::before {
+        left: 10px;
+    }
+    .exp-content.exp-left,
+    .exp-content.exp-right {
+        align-items: flex-start;
+    }
+    .exp-content.exp-empty {
+        display: none;
+    }
+    .exp-timeline-center {
+        order: -1;
+    }
+    .exp-timeline-dot {
+        margin-top: 0;
+    }
+    .exp-card {
+        max-width: 100%;
+    }
+    .section-title-experience {
+        font-size: 1.5rem;
+    }
+}
+
+/* Mobile Compact Styles */
+@media (max-width: 576px) {
+    .experience-section-landing {
+        padding: 30px 0;
+    }
+
+    .exp-row {
+        margin-bottom: 40px;
+    }
+
+    .exp-content {
+        gap: 10px;
+    }
+
+    /* Badge - Make Compact */
+    .exp-badge {
+        border-radius: 8px;
+        flex-wrap: wrap;
+        font-size: 11px;
+    }
+
+    .exp-badge-col {
+        padding: 8px 12px;
+        min-width: auto;
+    }
+
+    .exp-badge-value {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .exp-badge-label {
+        font-size: 8px;
+        margin-top: 2px;
+    }
+
+    /* Experience Card - Make Compact */
+    .exp-card {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .exp-company {
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+
+    .exp-position {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    .exp-description {
+        font-size: 12px;
+        line-height: 1.5;
+        margin-bottom: 12px;
+    }
+
+    /* Tags - Make Smaller */
+    .exp-tags {
+        gap: 6px;
+    }
+
+    .exp-tag {
+        padding: 5px 10px;
+        font-size: 10px;
+        border-radius: 12px;
+    }
+
+    /* Timeline adjustments */
+    .exp-timeline-dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .exp-row {
+        grid-template-columns: 16px 1fr;
+        gap: 12px;
+    }
+
+    .exp-timeline::before {
+        left: 8px;
+        width: 2px;
+    }
+}
+
+/* Fade-in animation on scroll */
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger animation for left and right items */
+.exp-left .fade-in-element {
+    transform: translateX(-30px);
+}
+
+.exp-right .fade-in-element {
+    transform: translateX(30px);
+}
+
+.exp-left .fade-in-visible,
+.exp-right .fade-in-visible {
+    transform: translateX(0);
+}
+
+/* Hover animation */
+.hover-animate {
+    transform: scale(1.02) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+    .exp-hidden-item {
+        display: none;
+    }
+    
+    .view-more-btn {
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .view-more-btn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.4);
+        background-color: #1a1a1a;
+    }
+    
+    .view-more-btn:active {
+        transform: translateY(-1px);
+    }
+    
+    .view-more-btn i {
+        transition: transform 0.4s ease;
+    }
+    
+    .view-more-btn.active i {
+        transform: rotate(180deg);
+    }
+    
+    .fade-in-item {
+        animation: fadeInSlide 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInSlide {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Certifications Section Styles */
+    .certifications-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 24px;
+        padding: 0 10px;
+    }
+
+    .certification-card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 24px;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .certification-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        border-color: #5FCECE;
+    }
+
+    .cert-icon {
+        background: rgba(95, 206, 206, 0.1);
+        color: #5FCECE;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+
+    .cert-content {
+        flex: 1;
+    }
+
+    .cert-name {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 4px;
+        line-height: 1.3;
+        margin-top: -2px;
+    }
+
+    .cert-issuer {
+        font-size: 14px;
+        color: #4b5563;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .cert-date {
+        font-size: 13px;
+        color: #9ca3af;
+        margin-bottom: 12px;
+    }
+
+    .cert-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: #5FCECE;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .cert-link:hover {
+        color: #42b2b2;
+        text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+        .certifications-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .certification-card {
+            padding: 20px;
+        }
+
+        .cert-name {
+            font-size: 16px;
+        }
+    }
+</style>
+    <style>
+        /* Minimalist Dark Sidebar */
+        .sidebar {
+            width: 60px;
+            height: auto;
+            max-height: 80vh; /* Increased from 280px to allow more items */
+            padding: 16px 0;
+            margin: auto 0;
+            margin-left: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* justify-content: center; Valid for centering, but we let nav take over */
+            background: #2d3748;
+            border-radius: 20px;
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: height 0.3s ease, max-height 0.3s ease;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            /* Enable scrolling */
+            width: 100%;
+            overflow-y: auto;
+            min-height: 0; 
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Changed from center to allow scrolling from top */
+            gap: 4px;
+            padding: 0;
+            
+            /* Hide Scrollbar for clean UI */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE 10+ */
+        }
+        
+        .sidebar-nav::-webkit-scrollbar { 
+            display: none; /* Chrome/Safari */
+        }
+
+        .nav-item {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 18px;
+            transition: all 0.3s ease;
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        }
+
+        .nav-item:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item.active {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-item.active::after {
+            display: none;
+        }
+
+        .nav-item .nav-emoji {
+            display: none;
+        }
+
+        .sidebar-brand {
+            display: none;
+        }
+
+        .sidebar-social {
+            display: none;
+        }
+
+        .main-content {
+            margin-left: 90px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 50px;
+                max-height: 240px;
+                margin-left: 10px;
+                padding: 12px 0;
+            }
+            .main-content {
+                margin-left: 70px;
+            }
+            .nav-item {
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .sidebar {
+                position: fixed;
+                bottom: 16px;
+                left: 50%;
+                right: auto;
+                top: auto;
+                transform: translateX(-50%);
+                width: auto;
+                max-width: 90%;
+                height: 56px;
+                max-height: none;
+                flex-direction: row;
+                justify-content: center;
+                padding: 0 16px;
+                margin: 0;
+                border-radius: 28px;
+            }
+            .sidebar-nav {
+                flex-direction: row;
+                gap: 8px;
+            }
+            .main-content {
+                margin-left: 0;
+                margin-bottom: 80px;
+            }
+            .nav-item {
+                width: 42px;
+                height: 42px;
+            }
+            .mobile-toggle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <button class="lang-btn" id="lang-id" onclick="setLanguage('id')">ID</button>
+        <button class="lang-btn active" id="lang-en" onclick="setLanguage('en')">EN</button>
+    </div>
+
+    <div class="layout-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+                        <nav class="sidebar-nav">
+                
+                                <a href="http://127.0.0.1:8001" class="nav-item active" title="Home" data-translate-title="nav_home">
+                    <i class="fas fa-home"></i>
+                </a>
+                                
+                
+                                <a href="http://127.0.0.1:8001#home" class="nav-item" title="Stats" data-translate-title="nav_stats">
+                    <i class="fas fa-chart-bar"></i>
+                </a>
+                                
+                
+                                <a href="http://127.0.0.1:8001#about" class="nav-item " title="About" data-translate-title="nav_about">
+                    <i class="fas fa-user"></i>
+                </a>
+                                
+                
+                                <a href="http://127.0.0.1:8001#experience" class="nav-item" title="Experience" data-translate-title="nav_experience">
+                    <i class="fas fa-briefcase"></i>
+                </a>
+                                
+                
+                                <a href="http://127.0.0.1:8001#education" class="nav-item" title="Education" data-translate-title="nav_education">
+                    <i class="fas fa-graduation-cap"></i>
+                </a>
+                                
+                
+                                <a href="http://127.0.0.1:8001#tech" class="nav-item" title="Tech Stack" data-translate-title="nav_tech">
+                    <i class="fas fa-code"></i>
+                </a>
+                                
+                
+                                <a href="http://127.0.0.1:8001#tech" class="nav-item" title="Skills" data-translate-title="nav_skills">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                                <a href="http://127.0.0.1:8001#certifications" class="nav-item" title="Certifications" data-translate-title="nav_certifications">
+                    <i class="fas fa-certificate"></i>
+                </a>
+                
+                
+                                <a href="http://127.0.0.1:8001#committee-activities" class="nav-item " title="Committee Activities" data-translate-title="nav_committee_activities">
+                    <i class="fas fa-calendar-check"></i>
+                </a>
+                
+                
+                                <a href="http://127.0.0.1:8001#career-aspiration" class="nav-item " title="Career Aspiration" data-translate-title="nav_career_aspiration">
+                    <i class="fas fa-rocket"></i>
+                </a>
+                
+                
+                                <a href="http://127.0.0.1:8001#automation-strategy" class="nav-item" title="Automation Strategy" data-translate-title="nav_automation_strategy">
+                    <i class="fas fa-cogs"></i>
+                </a>
+                
+                
+                                <a href="http://127.0.0.1:8001#obstacle-challenge" class="nav-item" title="Obstacle & Challenge" data-translate-title="nav_obstacle_challenge">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </a>
+                
+                
+                                <a href="http://127.0.0.1:8001#job-description" class="nav-item" title="Job Description" data-translate-title="nav_job_description">
+                    <i class="fas fa-clipboard-list"></i>
+                </a>
+                
+                
+                                <a href="http://127.0.0.1:8001#company-profile" class="nav-item " title="Company Profile" data-translate-title="nav_company_profile">
+                    <i class="fas fa-building"></i>
+                </a>
+                                
+                
+                                <a href="http://127.0.0.1:8001#organization-structure" class="nav-item " title="Organization Structure" data-translate-title="nav_organization_structure">
+                    <i class="fas fa-sitemap"></i>
+                </a>
+                
+                
+                                <a href="http://127.0.0.1:8001#projects" class="nav-item " title="Projects" data-translate-title="nav_projects">
+                    <i class="fas fa-folder-open"></i>
+                </a>
+                                
+                
+                                <a href="http://127.0.0.1:8001#contact-social" class="nav-item " title="Contact" data-translate-title="nav_contact">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                            </nav>
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section with Typed.js Animation -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <!-- Main Name with Scramble Effect -->
+                <h1 class="hero-name-main" id="scramble-text" data-text="Tubagus Imran"></h1>
+                
+                <!-- Greeting -->
+                <h2 class="hero-greeting-large" data-translate="hero_greeting">Hi, Folks 👋</h2>
+                
+                <!-- Typing Animation -->
+                <h2 class="hero-typed-text">
+                    <span data-translate="hero_role_prefix">I'm</span> <span id="typed" class="typed-orange"></span>
+                </h2>
+
+                    <p class="hero-subtitle" 
+                       data-dynamic-en="Hi, I’m a Creative Developer based in Jakarta. I specialize in building accessible, pixel-perfect user interfaces that balance form and function. I care about clean design systems, smooth interactions, and maintainable front-end code—calm, clean, consistent."
+                       data-dynamic-id="Creative Developer berbasis di Jakarta, berfokus pada pembuatan antarmuka yang aksesibel dan presisi hingga detail. Mengutamakan keseimbangan antara estetika dan fungsi, dengan perhatian pada design system yang rapi, interaksi yang halus, serta kode front-end yang mudah dirawat—tenang, rapi, konsisten.">
+                        Hi, I’m a Creative Developer based in Jakarta. I specialize in building accessible, pixel-perfect user interfaces that balance form and function. I care about clean design systems, smooth interactions, and maintainable front-end code—calm, clean, consistent.
+                    </p>
+                <div class="hero-buttons">
+                                            <a href="http://127.0.0.1:8001/storage/cv/EINn5YjRgSGZjdT4fos3PYnHHntXTCs0hhA44kF6.pdf" class="btn btn-primary" target="_blank">
+                            <i class="fas fa-file-pdf"></i> <span data-translate="hero_cv">Download CV</span>
+                        </a>
+                                        <a href="#contact-social" class="btn btn-outline">
+                        <span data-translate="hero_contact">Contact Me</span> <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-photo">
+                                            <img src="http://127.0.0.1:8001/images/profile.png" alt="Tubagus Imran">
+                                    </div>
+            </div>
+        </div>
+    </div>
+    
+
+</section>
+
+
+<!-- Stats Counter -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid-landing">
+            <div class="stat-item-landing">
+                <span class="stat-number-landing" data-count="5">0</span><span class="stat-suffix">+</span>
+                <span class="stat-label-landing" data-translate="stats_years">Years Experience</span>
+            </div>
+            <div class="stat-item-landing">
+                <span class="stat-number-landing" data-count="40">0</span><span class="stat-suffix">+</span>
+                <span class="stat-label-landing" data-translate="stats_projects">Projects Completed</span>
+            </div>
+            <div class="stat-item-landing">
+                <span class="stat-number-landing" data-count="25">0</span><span class="stat-suffix">+</span>
+                <span class="stat-label-landing" data-translate="stats_clients">Happy Clients</span>
+            </div>
+            <div class="stat-item-landing">
+                <span class="stat-number-landing" data-count="12">0</span>
+                <span class="stat-label-landing" data-translate="stats_awards">Awards Won</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- About Me Section -->
+<section class="about-section-landing" id="about">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" data-translate="section_about">About Me</h2>
+        
+        <div class="about-grid">
+            <!-- Image Column -->
+            <div class="about-image-col">
+                <div class="about-avatar-box">
+                    <img src="http://127.0.0.1:8001/images/profile-about.png" alt="Profile" class="about-avatar">
+                </div>
+            </div>
+            
+            <!-- Text Column -->
+            <div class="about-text-col">
+                <p class="about-desc">
+                    I started coding when I was 15, building simple WordPress themes. What began as a curiosity quickly turned into a career obsession. Today, I specialize in the MERN stack and Python. I believe code is just a tool to solve human problems, and I strive to make those solutions as elegant as possible.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Professional Experience Section -->
+<section class="experience-section-landing" id="experience">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" data-translate="section_exp">Professional Experience</h2>
+        
+        <div class="exp-timeline">
+                        <div class="exp-row ">
+                                    <div class="exp-content exp-left">
+                        <div class="exp-badge">
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">November 2023</span>
+                                <span class="exp-badge-label" data-translate="exp_start">Start</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">Present</span>
+                                <span class="exp-badge-label" data-translate="exp_end">End</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <!-- Location ID -->
+                                <span class="exp-badge-value lang-id" data-display="block" style="display: block;">Bekasi, Indonesia</span>
+                                <!-- Location EN -->
+                                <span class="exp-badge-value lang-en" data-display="block" style="display: none;">Bekasi, Indonesia</span>
+                                <span class="exp-badge-label" data-translate="exp_location">Location</span>
+                            </div>
+                        </div>
+                        <div class="exp-card">
+                            <!-- Company ID -->
+                            <h3 class="exp-company lang-id" data-display="block" style="display: block;">PT. Dharma Electrindo Mfg</h3>
+                            <!-- Company EN -->
+                            <h3 class="exp-company lang-en" data-display="block" style="display: none;">PT. Dharma Electrindo Mfg</h3>
+
+                            <p class="exp-position">
+                                <!-- Title ID -->
+                                <span class="lang-id" data-display="inline" style="display: inline;">Costing Staff</span>
+                                <!-- Title EN -->
+                                <span class="lang-en" data-display="inline" style="display: none;">Costing Staff</span>
+                                
+                                <span class="exp-type">• <span>Contract</span></span>
+                            </p>
+                            
+                            <div class="exp-description">
+                                <!-- Description ID -->
+                                <div class="lang-id" data-display="block" style="display: block;">
+                                                                            <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                                                                                                                                                                                        <li style="margin-bottom: 4px;">Menginput dan menghitung biaya produksi (COGM)</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Membuat permintaan part baru untuk Procurement &amp; Vendor</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Memantau data estimasi part serupa</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Memastikan perhitungan biaya akurat</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Menyusun laporan ringkasan biaya produksi</li>
+                                                                                                                                                                                        </ul>
+                                                                    </div>
+
+                                <!-- Description EN -->
+                                <div class="lang-en" data-display="block" style="display: none;">
+                                                                                                                <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                                                                                                                                                                                        <li style="margin-bottom: 4px;">Inputting and calculating production costs (COGM)</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Make new part requests for Procurement &amp; Vendors</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Monitor similar part estimation data</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Ensure accurate cost calculations</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Prepare a summary report of production costs</li>
+                                                                                                                                                                                        </ul>
+                                                                    </div>
+                            </div>
+
+                                                            <div class="exp-tags">
+                                    <div class="lang-id" style="display: block;">
+                                                                                                                                    <span class="exp-tag">SAP</span>
+                                                                                            <span class="exp-tag">Costing</span>
+                                                                                            <span class="exp-tag">COGM Analysis</span>
+                                                                                            <span class="exp-tag">Excel (Termasuk pivot table &amp; VBA Excel)</span>
+                                                                                            <span class="exp-tag">Microsoft Word</span>
+                                                                                            <span class="exp-tag">PowerPoint</span>
+                                                                                            <span class="exp-tag">Kerjasama tim</span>
+                                                                                            <span class="exp-tag">Disiplin</span>
+                                                                                            <span class="exp-tag">Problem solving</span>
+                                                                                            <span class="exp-tag">Kreativitas</span>
+                                                                                                                        </div>
+                                    <div class="lang-en" style="display: none;">
+                                                                                                                                    <span class="exp-tag">SAP</span>
+                                                                                            <span class="exp-tag">Costing</span>
+                                                                                            <span class="exp-tag">COGM Analysis</span>
+                                                                                            <span class="exp-tag">Excel (Includes Excel pivot table &amp; VBA)</span>
+                                                                                            <span class="exp-tag">Microsoft Word</span>
+                                                                                            <span class="exp-tag">Powerpoint</span>
+                                                                                            <span class="exp-tag">Teamwork</span>
+                                                                                            <span class="exp-tag">Discipline</span>
+                                                                                            <span class="exp-tag">Problem-Solving</span>
+                                                                                            <span class="exp-tag">Creativity</span>
+                                                                                                                        </div>
+                                </div>
+                                                    </div>
+                    </div>
+                    <div class="exp-timeline-center">
+                        <div class="exp-timeline-dot"></div>
+                    </div>
+                    <div class="exp-content exp-right exp-empty"></div>
+                            </div>
+                        <div class="exp-row ">
+                                    <div class="exp-content exp-left exp-empty"></div>
+                    <div class="exp-timeline-center">
+                        <div class="exp-timeline-dot"></div>
+                    </div>
+                    <div class="exp-content exp-right">
+                        <div class="exp-badge">
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">August 2023</span>
+                                <span class="exp-badge-label" data-translate="exp_start">Start</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">November 2023</span>
+                                <span class="exp-badge-label" data-translate="exp_end">End</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                 <!-- Location ID -->
+                                <span class="exp-badge-value lang-id" style="display: block;">Bekasi, Indonesia</span>
+                                <!-- Location EN -->
+                                <span class="exp-badge-value lang-en" style="display: none;">Bekasi, Indonesia</span>
+                                <span class="exp-badge-label" data-translate="exp_location">Location</span>
+                            </div>
+                        </div>
+                        <div class="exp-card">
+                             <!-- Company ID -->
+                            <h3 class="exp-company lang-id" style="display: block;">PT. Dharma Electrindo Mfg</h3>
+                            <!-- Company EN -->
+                            <h3 class="exp-company lang-en" style="display: none;">PT. Dharma Electrindo Mfg</h3>
+
+                            <p class="exp-position">
+                                <!-- Title ID -->
+                                <span class="lang-id" style="display: inline;">Admin Document Control</span>
+                                <!-- Title EN -->
+                                <span class="lang-en" style="display: none;">Admin Document Control</span>
+
+                                <span class="exp-type">• <span>Contract</span></span>
+                            </p>
+
+                            <div class="exp-description">
+                                 <!-- Description ID -->
+                                <div class="lang-id" style="display: block;">
+                                                                            <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                                                                                                                                                                                        <li style="margin-bottom: 4px;">Menerima, mencatat, dan mendistribusikan dokumen proyek</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Menyimpan dokumen sesuai standar perusahaan dan customer</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Menjaga kerahasiaan dokumen serta memastikan akses hanya pihak berwenang</li>
+                                                                                                                                                                                        </ul>
+                                                                    </div>
+                                
+                                <!-- Description EN -->
+                                <div class="lang-en" style="display: none;">
+                                                                                                                <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                                                                                                                                                                                        <li style="margin-bottom: 4px;">Receiving, recording, and distributing project documents</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Store documents according to company and customer standards</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Maintain the confidentiality of documents and ensure access only by the authorities</li>
+                                                                                                                                                                                        </ul>
+                                                                    </div>
+                            </div>
+
+                                                            <div class="exp-tags">
+                                    <div class="lang-id" style="display: block;">
+                                                                                                                                    <span class="exp-tag">SAP</span>
+                                                                                            <span class="exp-tag">Excel (Termasuk pivot table &amp; VBA Excel)</span>
+                                                                                            <span class="exp-tag">PowerPoint</span>
+                                                                                            <span class="exp-tag">Kerjasama tim</span>
+                                                                                                                        </div>
+                                    <div class="lang-en" style="display: none;">
+                                                                                                                                    <span class="exp-tag">SAP</span>
+                                                                                            <span class="exp-tag">Excel (Includes Excel pivot table &amp; VBA)</span>
+                                                                                            <span class="exp-tag">Powerpoint</span>
+                                                                                            <span class="exp-tag">Teamwork</span>
+                                                                                                                         </div>
+                                </div>
+                                                    </div>
+                    </div>
+                            </div>
+                        <div class="exp-row ">
+                                    <div class="exp-content exp-left">
+                        <div class="exp-badge">
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">2022</span>
+                                <span class="exp-badge-label" data-translate="exp_start">Start</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">2023</span>
+                                <span class="exp-badge-label" data-translate="exp_end">End</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <!-- Location ID -->
+                                <span class="exp-badge-value lang-id" data-display="block" style="display: block;">Bogor, Indonesia</span>
+                                <!-- Location EN -->
+                                <span class="exp-badge-value lang-en" data-display="block" style="display: none;">Bogor, Indonesia</span>
+                                <span class="exp-badge-label" data-translate="exp_location">Location</span>
+                            </div>
+                        </div>
+                        <div class="exp-card">
+                            <!-- Company ID -->
+                            <h3 class="exp-company lang-id" data-display="block" style="display: block;">PT. Furnimart Mebelindo Sakti</h3>
+                            <!-- Company EN -->
+                            <h3 class="exp-company lang-en" data-display="block" style="display: none;">PT. Furnimart Mebelindo Sakti</h3>
+
+                            <p class="exp-position">
+                                <!-- Title ID -->
+                                <span class="lang-id" data-display="inline" style="display: inline;">Staff Admin</span>
+                                <!-- Title EN -->
+                                <span class="lang-en" data-display="inline" style="display: none;">Staff Admin</span>
+                                
+                                <span class="exp-type">• <span>Contract</span></span>
+                            </p>
+                            
+                            <div class="exp-description">
+                                <!-- Description ID -->
+                                <div class="lang-id" data-display="block" style="display: block;">
+                                                                            <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                                                                                                                                                                                        <li style="margin-bottom: 4px;">Mengontrol keluar masuk barang serta membuat surat jalan dan delivery order.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Melakukan input data stok ke dalam sistem inventory (SAP/WMS/Excel).</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Melakukan stock opname rutin untuk memastikan akurasi data fisik dan sistem.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Mengarsipkan dokumen logistik dan surat jalan dengan rapi.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Berkoordinasi dengan tim helper dan supir untuk jadwal pengiriman.</li>
+                                                                                                                                                                                        </ul>
+                                                                    </div>
+
+                                <!-- Description EN -->
+                                <div class="lang-en" data-display="block" style="display: none;">
+                                                                                                                <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                                                                                                                                                                                        <li style="margin-bottom: 4px;">Controlling the entry and exit of goods and making road mail and delivery orders.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Input stock data into the inventory system (SAP/WMS/Excel).</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Conduct routine stock taking to ensure the accuracy of physical and system data.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Filing logistical documents and road letters neatly.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Coordinate with helper and driver teams for delivery schedules.</li>
+                                                                                                                                                                                        </ul>
+                                                                    </div>
+                            </div>
+
+                                                            <div class="exp-tags">
+                                    <div class="lang-id" style="display: block;">
+                                                                                                                                    <span class="exp-tag">Odoo</span>
+                                                                                            <span class="exp-tag">Excel (Termasuk pivot table &amp; VBA Excel)</span>
+                                                                                            <span class="exp-tag">Sales</span>
+                                                                                            <span class="exp-tag">Editing</span>
+                                                                                                                        </div>
+                                    <div class="lang-en" style="display: none;">
+                                                                                                                                    <span class="exp-tag">Odoo</span>
+                                                                                            <span class="exp-tag">Excel (Includes Excel pivot table &amp; VBA)</span>
+                                                                                            <span class="exp-tag">Sales</span>
+                                                                                            <span class="exp-tag">Editing</span>
+                                                                                                                        </div>
+                                </div>
+                                                    </div>
+                    </div>
+                    <div class="exp-timeline-center">
+                        <div class="exp-timeline-dot"></div>
+                    </div>
+                    <div class="exp-content exp-right exp-empty"></div>
+                            </div>
+                        <div class="exp-row exp-hidden-item">
+                                    <div class="exp-content exp-left exp-empty"></div>
+                    <div class="exp-timeline-center">
+                        <div class="exp-timeline-dot"></div>
+                    </div>
+                    <div class="exp-content exp-right">
+                        <div class="exp-badge">
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">2021</span>
+                                <span class="exp-badge-label" data-translate="exp_start">Start</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">2022</span>
+                                <span class="exp-badge-label" data-translate="exp_end">End</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                 <!-- Location ID -->
+                                <span class="exp-badge-value lang-id" style="display: block;">Balaraja, Indonesia</span>
+                                <!-- Location EN -->
+                                <span class="exp-badge-value lang-en" style="display: none;">Balaraja, Indonesia</span>
+                                <span class="exp-badge-label" data-translate="exp_location">Location</span>
+                            </div>
+                        </div>
+                        <div class="exp-card">
+                             <!-- Company ID -->
+                            <h3 class="exp-company lang-id" style="display: block;">PT. Mayora Indah Tbk.</h3>
+                            <!-- Company EN -->
+                            <h3 class="exp-company lang-en" style="display: none;">PT. Mayora Indah Tbk.</h3>
+
+                            <p class="exp-position">
+                                <!-- Title ID -->
+                                <span class="lang-id" style="display: inline;">Checker Warehouse (Raw Material)</span>
+                                <!-- Title EN -->
+                                <span class="lang-en" style="display: none;">Checker Warehouse (Raw Material)</span>
+
+                                <span class="exp-type">• <span>Contract</span></span>
+                            </p>
+
+                            <div class="exp-description">
+                                 <!-- Description ID -->
+                                <div class="lang-id" style="display: block;">
+                                                                            <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                                                                                                                                                                                        <li style="margin-bottom: 4px;">Mengelola administrasi keluar masuk barang dan inventory.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Membuat laporan stok gudang secara berkala.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Menginput data penerimaan dan pengiriman barang ke sistem.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Mencocokkan data fisik barang dengan catatan sistem (Stock Opname).</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Berkoordinasi dengan tim logistik untuk pengiriman barang.</li>
+                                                                                                                                                                                        </ul>
+                                                                    </div>
+                                
+                                <!-- Description EN -->
+                                <div class="lang-en" style="display: none;">
+                                                                                                                <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                                                                                                                                                                                        <li style="margin-bottom: 4px;">Managing administration in and out of goods and inventory.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Generate warehouse stock reports on a regular basis.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Inputting data on the receipt and delivery of goods to the system.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Match the physical data of the goods with the system records (Stock Opname).</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Coordinate with the logistics team for the delivery of goods.</li>
+                                                                                                                                                                                        </ul>
+                                                                    </div>
+                            </div>
+
+                                                            <div class="exp-tags">
+                                    <div class="lang-id" style="display: block;">
+                                                                                                                                    <span class="exp-tag">WMS</span>
+                                                                                            <span class="exp-tag">SAP</span>
+                                                                                            <span class="exp-tag">Pallet Movers</span>
+                                                                                            <span class="exp-tag">Forklift</span>
+                                                                                            <span class="exp-tag">Inventory Management</span>
+                                                                                            <span class="exp-tag">Supply Chain Management</span>
+                                                                                                                        </div>
+                                    <div class="lang-en" style="display: none;">
+                                                                                                                                    <span class="exp-tag">WMS</span>
+                                                                                            <span class="exp-tag">SAP</span>
+                                                                                            <span class="exp-tag">Pallet Movers</span>
+                                                                                            <span class="exp-tag">Forklift</span>
+                                                                                            <span class="exp-tag">Inventory Management</span>
+                                                                                            <span class="exp-tag">Supply Chain Management</span>
+                                                                                                                         </div>
+                                </div>
+                                                    </div>
+                    </div>
+                            </div>
+                        <div class="exp-row exp-hidden-item">
+                                    <div class="exp-content exp-left">
+                        <div class="exp-badge">
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">2020</span>
+                                <span class="exp-badge-label" data-translate="exp_start">Start</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">2021</span>
+                                <span class="exp-badge-label" data-translate="exp_end">End</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <!-- Location ID -->
+                                <span class="exp-badge-value lang-id" data-display="block" style="display: block;">Karawang, Indonesia</span>
+                                <!-- Location EN -->
+                                <span class="exp-badge-value lang-en" data-display="block" style="display: none;">Karawang, Indonesia</span>
+                                <span class="exp-badge-label" data-translate="exp_location">Location</span>
+                            </div>
+                        </div>
+                        <div class="exp-card">
+                            <!-- Company ID -->
+                            <h3 class="exp-company lang-id" data-display="block" style="display: block;">PT. Mitra Metal Perkasa</h3>
+                            <!-- Company EN -->
+                            <h3 class="exp-company lang-en" data-display="block" style="display: none;">PT. Mitra Metal Perkasa</h3>
+
+                            <p class="exp-position">
+                                <!-- Title ID -->
+                                <span class="lang-id" data-display="inline" style="display: inline;">Admin Produksi</span>
+                                <!-- Title EN -->
+                                <span class="lang-en" data-display="inline" style="display: none;">Production Admin</span>
+                                
+                                <span class="exp-type">• <span>Contract</span></span>
+                            </p>
+                            
+                            <div class="exp-description">
+                                <!-- Description ID -->
+                                <div class="lang-id" data-display="block" style="display: block;">
+                                                                            <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                                                                                                                                                                                        <li style="margin-bottom: 4px;">Menginput data hasil produksi harian ke dalam sistem database.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Membuat laporan produksi harian, mingguan, dan bulanan.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Memastikan ketersediaan bahan baku untuk kelancaran proses produksi.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Berkoordinasi dengan tim gudang dan PPIC terkait jadwal produksi.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Mengarsipkan dokumen-dokumen produksi (Surat Jalan, DO, Invoice) dengan rapi.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Memonitor stok barang jadi (finish goods) dan barang dalam proses (WIP).</li>
+                                                                                                                                                                                        </ul>
+                                                                    </div>
+
+                                <!-- Description EN -->
+                                <div class="lang-en" data-display="block" style="display: none;">
+                                                                                                                <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                                                                                                                                                                                        <li style="margin-bottom: 4px;">Inputting daily production data into the database system.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Create daily, weekly, and monthly production reports.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Ensure the availability of raw materials for a smooth production process.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Coordinate with warehouse and PPIC teams regarding production schedules.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Filing production documents (Road Letters, DOs, Invoices) neatly.</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Monitor the stock of finished goods (finish goods) and in-process goods (WIP).</li>
+                                                                                                                                                                                        </ul>
+                                                                    </div>
+                            </div>
+
+                                                            <div class="exp-tags">
+                                    <div class="lang-id" style="display: block;">
+                                                                                                                                    <span class="exp-tag">WMS</span>
+                                                                                            <span class="exp-tag">SAP</span>
+                                                                                            <span class="exp-tag">Excel (Termasuk pivot table &amp; VBA Excel)</span>
+                                                                                                                        </div>
+                                    <div class="lang-en" style="display: none;">
+                                                                                                                                    <span class="exp-tag">WMS</span>
+                                                                                            <span class="exp-tag">SAP</span>
+                                                                                            <span class="exp-tag">Excel (Includes Excel pivot table &amp; VBA)</span>
+                                                                                                                        </div>
+                                </div>
+                                                    </div>
+                    </div>
+                    <div class="exp-timeline-center">
+                        <div class="exp-timeline-dot"></div>
+                    </div>
+                    <div class="exp-content exp-right exp-empty"></div>
+                            </div>
+                        <div class="exp-row exp-hidden-item">
+                                    <div class="exp-content exp-left exp-empty"></div>
+                    <div class="exp-timeline-center">
+                        <div class="exp-timeline-dot"></div>
+                    </div>
+                    <div class="exp-content exp-right">
+                        <div class="exp-badge">
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">2018</span>
+                                <span class="exp-badge-label" data-translate="exp_start">Start</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">2020</span>
+                                <span class="exp-badge-label" data-translate="exp_end">End</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                 <!-- Location ID -->
+                                <span class="exp-badge-value lang-id" style="display: block;">Bogor, Indonesia</span>
+                                <!-- Location EN -->
+                                <span class="exp-badge-value lang-en" style="display: none;">Bogor, Indonesia</span>
+                                <span class="exp-badge-label" data-translate="exp_location">Location</span>
+                            </div>
+                        </div>
+                        <div class="exp-card">
+                             <!-- Company ID -->
+                            <h3 class="exp-company lang-id" style="display: block;">PT. Sumber Alfaria Trijaya Tbk.</h3>
+                            <!-- Company EN -->
+                            <h3 class="exp-company lang-en" style="display: none;">PT. Sumber Alfaria Trijaya Tbk.</h3>
+
+                            <p class="exp-position">
+                                <!-- Title ID -->
+                                <span class="lang-id" style="display: inline;">Issuing</span>
+                                <!-- Title EN -->
+                                <span class="lang-en" style="display: none;">Issuing</span>
+
+                                <span class="exp-type">• <span>Contract</span></span>
+                            </p>
+
+                            <div class="exp-description">
+                                 <!-- Description ID -->
+                                <div class="lang-id" style="display: block;">
+                                                                            <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                                                                                                                                                                                        <li style="margin-bottom: 4px;">Mengecek barang masuk dan keluar</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Menyiapkan barang untuk distribusi</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Membuat administrasi pengiriman dan penerimaan barang</li>
+                                                                                                                                                                                        </ul>
+                                                                    </div>
+                                
+                                <!-- Description EN -->
+                                <div class="lang-en" style="display: none;">
+                                                                                                                <ul style="padding-left: 20px; margin: 5px 0; list-style-type: disc; color: inherit;">
+                                                                                                                                                                                                        <li style="margin-bottom: 4px;">Checking items in and out</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Preparing goods for distribution</li>
+                                                                                                                                                                                                                                                                                                            <li style="margin-bottom: 4px;">Making administration of the delivery and receipt of goods</li>
+                                                                                                                                                                                        </ul>
+                                                                    </div>
+                            </div>
+
+                                                            <div class="exp-tags">
+                                    <div class="lang-id" style="display: block;">
+                                                                                                                                    <span class="exp-tag">Pallet Mover</span>
+                                                                                            <span class="exp-tag">Inventory Management</span>
+                                                                                            <span class="exp-tag">Teamwork</span>
+                                                                                                                        </div>
+                                    <div class="lang-en" style="display: none;">
+                                                                                                                                    <span class="exp-tag">Pallet Mover</span>
+                                                                                            <span class="exp-tag">Inventory Management</span>
+                                                                                            <span class="exp-tag">Teamwork</span>
+                                                                                                                         </div>
+                                </div>
+                                                    </div>
+                    </div>
+                            </div>
+                    </div>
+        
+                <div class="view-more-container" style="text-align: center; margin-top: 40px; position: relative; z-index: 10;">
+            <button id="view-more-btn" class="view-more-btn">
+                <span>View More Experience</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+            </div>
+</section>
+
+<!-- Education Section -->
+<section class="education-section-landing" id="education">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" data-translate="section_edu">Education</h2>
+        
+        <div class="exp-timeline">
+                        <div class="exp-row">
+                                    <div class="exp-content exp-left">
+                        <div class="exp-badge">
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">2025</span>
+                                <span class="exp-badge-label" data-translate="exp_start">Start</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">Present</span>
+                                <span class="exp-badge-label" data-translate="exp_end">End</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">Cikarang Utara, Jawa Barat, Indonesia</span>
+                                <span class="exp-badge-label" data-translate="exp_location">Location</span>
+                            </div>
+                        </div>
+                        <div class="exp-card">
+                            <h3 class="exp-company">POLITEKNIK META INDUSTRI</h3>
+                            <p class="exp-position">Applied Bachelor (D4), Software Engineering Technology
+                                                                    <span class="exp-type">• GPA -</span>
+                                                            </p>
+                            <div class="exp-description">
+                                                                    Focused on Software Engineering and Artificial Intelligence. Active in student organizations and completed a thesis on Machine Learning for accessibility.
+                                                            </div>
+                        </div>
+                    </div>
+                    <div class="exp-timeline-center">
+                        <div class="exp-timeline-dot"></div>
+                    </div>
+                    <div class="exp-content exp-right exp-empty"></div>
+                            </div>
+                        <div class="exp-row">
+                                    <div class="exp-content exp-left exp-empty"></div>
+                    <div class="exp-timeline-center">
+                        <div class="exp-timeline-dot"></div>
+                    </div>
+                    <div class="exp-content exp-right">
+                        <div class="exp-badge">
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">2015</span>
+                                <span class="exp-badge-label" data-translate="exp_start">Start</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">2018</span>
+                                <span class="exp-badge-label" data-translate="exp_end">End</span>
+                            </div>
+                            <div class="exp-badge-divider"></div>
+                            <div class="exp-badge-col">
+                                <span class="exp-badge-value">Bogor, Indonesia</span>
+                                <span class="exp-badge-label" data-translate="exp_location">Location</span>
+                            </div>
+                        </div>
+                        <div class="exp-card">
+                            <h3 class="exp-company">MA NEGERI 1 BOGOR</h3>
+                            <p class="exp-position">IPA
+                                                                    <span class="exp-type">• GPA 82.9</span>
+                                                            </p>
+                            <p class="exp-description">
+                                
+                            </p>
+                        </div>
+                    </div>
+                            </div>
+                    </div>
+    </div>
+</section>
+
+<!-- Quote Section -->
+<section class="quote-section-landing">
+    <div class="container">
+        <div class="quote-box">
+            <p class="quote-text">"Not chasing impressions—growing trust: calm, clean, consistent."</p>
+            <p class="quote-author">- Tubagus Imran</p>
+        </div>
+    </div>
+</section>
+
+<!-- Tech Stack -->
+<section class="tech-stack" id="tech">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" data-translate="section_tech">Tech Stack That I Use</h2>
+        <div class="tech-badges-grid">
+                        <div class="tech-badge">
+                <i class="fab fa-js-square"></i>
+                <span>JavaScript</span>
+            </div>
+                        <div class="tech-badge">
+                <i class="fab fa-php"></i>
+                <span>PHP</span>
+            </div>
+                        <div class="tech-badge">
+                <i class="fab fa-python"></i>
+                <span>Python</span>
+            </div>
+                        <div class="tech-badge">
+                <i class="fab fa-react"></i>
+                <span>React</span>
+            </div>
+                        <div class="tech-badge">
+                <i class="fab fa-vuejs"></i>
+                <span>Vue.js</span>
+            </div>
+                        <div class="tech-badge">
+                <i class="fab fa-laravel"></i>
+                <span>Laravel</span>
+            </div>
+                        <div class="tech-badge">
+                <i class="fab fa-node-js"></i>
+                <span>Node.js</span>
+            </div>
+                        <div class="tech-badge">
+                <i class="fas fa-wind"></i>
+                <span>Tailwind</span>
+            </div>
+                        <div class="tech-badge">
+                <i class="fab fa-docker"></i>
+                <span>Docker</span>
+            </div>
+                        <div class="tech-badge">
+                <i class="fas fa-database"></i>
+                <span>MySQL</span>
+            </div>
+                    </div>
+    </div>
+</section>
+
+<!-- Additional Information Section -->
+<section class="additional-info-section" style="padding: 0 0 60px 0;">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" style="margin-bottom: 40px;">Additional Information</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Technical Skills -->
+            <div class="info-column">
+                <h3 class="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-orange-500 inline-block pb-2">Technical Skills</h3>
+                <ul class="space-y-4">
+                                            <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <div>
+                                <strong class="text-gray-900">
+                                    <span class="lang-id" data-display="inline">Web Development</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">Web Development</span>
+                                    :
+                                </strong>
+                                <span class="text-gray-700">
+                                    <span class="lang-id" data-display="inline">HTML, CSS, JavaScript, PHP, LARAVEL</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">HTML, CSS, JavaScript, PHP, LARAVEL</span>
+                                </span>
+                            </div>
+                        </li>
+                                            <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <div>
+                                <strong class="text-gray-900">
+                                    <span class="lang-id" data-display="inline">Networking &amp; System</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">Networking &amp; System</span>
+                                    :
+                                </strong>
+                                <span class="text-gray-700">
+                                    <span class="lang-id" data-display="inline">Microtic Configuration, Linux Debian, LAN/WAN Setup, Computer Troubleshooting</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">Microtic Configuration, Linux Debian, LAN/WAN Setup, Computer Troubleshooting</span>
+                                </span>
+                            </div>
+                        </li>
+                                            <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <div>
+                                <strong class="text-gray-900">
+                                    <span class="lang-id" data-display="inline">Hardware &amp; Software Maintenance</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">Hardware &amp; Software Maintenance</span>
+                                    :
+                                </strong>
+                                <span class="text-gray-700">
+                                    <span class="lang-id" data-display="inline">Perakitan dan instalasi hardware maupun software</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">Assembly and installation of hardware and software</span>
+                                </span>
+                            </div>
+                        </li>
+                                            <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <div>
+                                <strong class="text-gray-900">
+                                    <span class="lang-id" data-display="inline">Database Management</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">Database Management</span>
+                                    :
+                                </strong>
+                                <span class="text-gray-700">
+                                    <span class="lang-id" data-display="inline">MySQL, phpMyAdmin</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">MySQL, phpMyAdmin</span>
+                                </span>
+                            </div>
+                        </li>
+                                            <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <div>
+                                <strong class="text-gray-900">
+                                    <span class="lang-id" data-display="inline">Office &amp; Productivity Tools</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">Office &amp; Productivity Tools</span>
+                                    :
+                                </strong>
+                                <span class="text-gray-700">
+                                    <span class="lang-id" data-display="inline">Microsoft Word, Excel (Termasuk pivot table &amp; VBA Excel), PowerPoint</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">Microsoft Word, Excel (Includes Excel pivot table &amp; VBA), Powerpoint</span>
+                                </span>
+                            </div>
+                        </li>
+                                            <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <div>
+                                <strong class="text-gray-900">
+                                    <span class="lang-id" data-display="inline">Tools &amp; Software</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">Tools &amp; Software</span>
+                                    :
+                                </strong>
+                                <span class="text-gray-700">
+                                    <span class="lang-id" data-display="inline">Visual Studio Code, Git, XAMPP, Postman, Laragon, WMS, SAP, Odoo</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">Visual Studio Code, Git, XAMPP, Postman, Laragon, WMS, SAP, Odoo</span>
+                                </span>
+                            </div>
+                        </li>
+                                            <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <div>
+                                <strong class="text-gray-900">
+                                    <span class="lang-id" data-display="inline">Operational &amp; Logistics</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">Operational &amp; Logistics</span>
+                                    :
+                                </strong>
+                                <span class="text-gray-700">
+                                    <span class="lang-id" data-display="inline">Costing, COGM Analysis, Inventory Management, Supply Chain Management, Forklift, Pallet Movers</span>
+                                    <span class="lang-en" style="display: none;" data-display="inline">Costing, COGM Analysis, Inventory Management, Supply Chain Management, Forklift, Pallet Movers</span>
+                                </span>
+                            </div>
+                        </li>
+                                    </ul>
+            </div>
+
+            <!-- Soft Skills -->
+            <div class="info-column mt-8 md:mt-0">
+                <h3 class="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-orange-500 inline-block pb-2">Soft Skills</h3>
+                <ul class="space-y-4">
+                                             <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-star"></i></span>
+                            <div>
+                                                                    <strong class="text-gray-900">
+                                        <span class="lang-id" data-display="inline">Komunikasi dan presentasi yang efektif</span>
+                                        <span class="lang-en" style="display: none;" data-display="inline">Effective communication and presentation</span>
+                                        
+                                    </strong>
+                                                                                            </div>
+                        </li>
+                                             <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-star"></i></span>
+                            <div>
+                                                                    <strong class="text-gray-900">
+                                        <span class="lang-id" data-display="inline">Kerjasama tim</span>
+                                        <span class="lang-en" style="display: none;" data-display="inline">Teamwork</span>
+                                        
+                                    </strong>
+                                                                                            </div>
+                        </li>
+                                             <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-star"></i></span>
+                            <div>
+                                                                    <strong class="text-gray-900">
+                                        <span class="lang-id" data-display="inline">Teliti</span>
+                                        <span class="lang-en" style="display: none;" data-display="inline">Detail-oriented</span>
+                                        
+                                    </strong>
+                                                                                            </div>
+                        </li>
+                                             <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-star"></i></span>
+                            <div>
+                                                                    <strong class="text-gray-900">
+                                        <span class="lang-id" data-display="inline">Disiplin</span>
+                                        <span class="lang-en" style="display: none;" data-display="inline">Discipline</span>
+                                        
+                                    </strong>
+                                                                                            </div>
+                        </li>
+                                             <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-star"></i></span>
+                            <div>
+                                                                    <strong class="text-gray-900">
+                                        <span class="lang-id" data-display="inline">Kreativitas</span>
+                                        <span class="lang-en" style="display: none;" data-display="inline">Creativity</span>
+                                        
+                                    </strong>
+                                                                                            </div>
+                        </li>
+                                             <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-star"></i></span>
+                            <div>
+                                                                    <strong class="text-gray-900">
+                                        <span class="lang-id" data-display="inline">Problem solving</span>
+                                        <span class="lang-en" style="display: none;" data-display="inline">Problem solving</span>
+                                        
+                                    </strong>
+                                                                                            </div>
+                        </li>
+                                             <li class="flex items-start">
+                            <span class="text-orange-500 mr-2 mt-1"><i class="fas fa-star"></i></span>
+                            <div>
+                                                                    <strong class="text-gray-900">
+                                        <span class="lang-id" data-display="inline">Manajemen Waktu</span>
+                                        <span class="lang-en" style="display: none;" data-display="inline">Time Management</span>
+                                        
+                                    </strong>
+                                                                                            </div>
+                        </li>
+                                    </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Career Aspiration Section -->
+<section class="career-aspiration-section" id="career-aspiration" style="padding: 60px 0;">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" style="margin-bottom: 40px;">
+            <span class="lang-id" data-display="inline">Aspirasi Karir</span>
+            <span class="lang-en" style="display: none;" data-display="inline">Career Aspiration</span>
+        </h2>
+        
+        <div class="career-content-wrapper" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+            <!-- Aspiration Text -->
+            <div class="aspiration-text-box" style="background: var(--bg-secondary); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                <div class="icon-header" style="font-size: 40px; color: var(--accent-orange); margin-bottom: 20px;">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 16px; color: var(--text-primary);">
+                    <span class="lang-id" data-display="inline">Visi Masa Depan</span>
+                    <span class="lang-en" style="display: none;" data-display="inline">Future Vision</span>
+                </h3>
+                <div class="aspiration-body" style="color: var(--text-secondary); line-height: 1.8;">
+                    <span class="lang-id" data-display="block">
+                        Menjadi arsitek perangkat lunak kelas dunia.
+                    </span>
+                    <span class="lang-en" style="display: none;" data-display="block">
+                        To become a world-class software architect.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Milestones Timeline -->
+            <div class="milestones-timeline-box">
+                <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: var(--text-primary);">Milestones</h3>
+                <div class="milestones-list" style="position: relative; padding-left: 20px; border-left: 2px solid var(--accent-green);">
+                                        <div class="milestone-item" style="position: relative; margin-bottom: 30px; padding-left: 20px;">
+                        <div class="milestone-dot" style="position: absolute; left: -27px; top: 0; width: 12px; height: 12px; background: var(--accent-green); border-radius: 50%; border: 2px solid var(--bg-primary);"></div>
+                        <span class="milestone-year" style="display: inline-block; background: rgba(95, 206, 206, 0.1); color: var(--accent-green); padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 8px;">2024</span>
+                        <h4 class="milestone-title" style="font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Senior Engineer</h4>
+                        <p class="milestone-desc" style="color: var(--text-secondary); font-size: 14px;">Promoted to Senior</p>
+                    </div>
+                                    </div>
+            </div>
+        </div>
+
+        <style>
+             @media (max-width: 768px) {
+                .career-content-wrapper {
+                    grid-template-columns: 1fr !important;
+                }
+             }
+        </style>
+    </div>
+</section>
+
+<!-- Certifications Section -->
+<section class="certifications-section" style="padding: 0 0 60px 0;">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" style="margin-bottom: 40px;" data-translate="section_certifications">Certifications</h2>
+        
+        <div class="certifications-grid">
+                            <div class="text-center text-muted col-span-full">
+                    No certifications added yet.
+                </div>
+                    </div>
+    </div>
+</section>
+
+<!-- Company Profile Section -->
+<section class="company-profile-section" id="company-profile" style="padding: 60px 0;">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" style="margin-bottom: 40px;">
+            <span class="lang-id" data-display="inline">Profil Perusahaan</span>
+            <span class="lang-en" style="display: none;" data-display="inline">Company Profile</span>
+        </h2>
+
+        
+        <div class="flex flex-col items-center mb-8">
+            <div class="flex items-center gap-4 mb-4">
+                                    <img src="http://127.0.0.1:8001/storage/company/misc/kSgAlbU3QLE1sRsYcSMTiEwzeZ82Od7okURfILda.png" class="h-24 w-auto object-contain">
+                                <div class="text-left">
+                    <h3 class="text-2xl font-bold text-blue-900 uppercase">PT Dharma Electrindo Mfg.</h3>
+                                            <p class="text-green-600 font-semibold italic">Exist To Contribute</p>
+                                    </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <div class="lg:col-span-3 space-y-6">
+                
+                                <div class="border-2 border-blue-200 p-1 rounded-lg shadow-lg bg-blue-50">
+                    <div class="overflow-hidden rounded h-48 bg-gray-200">
+                                                    <img src="http://127.0.0.1:8001/storage/company/plants/oGIJsmuML0jc92uWmhKew7nuKnAkBbDR6RlBxxAo.jpg" class="w-full h-full object-cover">
+                                            </div>
+                    <div class="bg-blue-900 text-white text-center py-2 text-sm font-bold mt-1 rounded">
+                        PT. Dharma Electrindo Mfg. Plant 1 Cikarang
+                    </div>
+                </div>
+                
+                
+                                <div class="border-2 border-blue-200 p-1 rounded-lg shadow-lg bg-blue-50">
+                    <div class="overflow-hidden rounded h-48 bg-gray-200">
+                                                    <img src="http://127.0.0.1:8001/storage/company/plants/3Cq2R6RljSUv9uAglZ9L49Ppufg5MfJdwvbis7gk.png" class="w-full h-full object-cover">
+                                            </div>
+                    <div class="bg-blue-900 text-white text-center py-2 text-sm font-bold mt-1 rounded">
+                        PT. Dharma Electrindo Mfg. Plant 2 Cikarang
+                    </div>
+                </div>
+                
+                
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-bold text-gray-800 mb-4 text-center border-b pb-2">Karyawan PT Dharma Electrindo Mfg.</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gray-800 text-white flex items-center justify-center">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold">Cikarang</div>
+                                <div class="text-gray-600">169 Orang</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gray-800 text-white flex items-center justify-center">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold">Cirebon</div>
+                                <div class="text-gray-600">1660 Orang</div>
+                            </div>
+                        </div>
+                        <div class="pt-2 border-t mt-2">
+                            <div class="font-bold text-sm">Total Keseluruhan</div>
+                            <div class="text-xl font-bold text-blue-900">1829 Orang</div>
+                        </div>
+                    </div>
+                </div>
+                            </div>
+
+            
+            <div class="lg:col-span-9 space-y-8">
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 text-justify text-gray-700 leading-relaxed text-base">
+                        Sejak berdiri pada 14 Agustus 2002, PT Dharma Electrindo Manufacturing merupakan salah satu sub-co dari Dharma Group dan sub holding dari Triputra Group yang bergerak di bidang Manufacturing Automotive (produksi Wiring Harness,Automotive Electronic Parts, Power &amp; Energy Solution, AMR System). Perusahaan ini tidak hanya fokus pada produksi, tetapi juga senantiasa berinovasi dan mengembangkan produk-produk yang berkualitas tinggi untuk memenuhi kebutuhan pasar otomotif yang saat ini terus berkembang.
+                    </div>
+                    <div class="md:col-span-1 flex flex-col items-center md:items-end space-y-4">
+                        
+                                                <div class="text-center w-48">
+                            <div class="bg-gray-200 h-56 rounded-lg overflow-hidden mb-2 shadow-lg border-2 border-gray-100">
+                                                                    <img src="http://127.0.0.1:8001/storage/company/directors/nzRLdg2rSic9gtiMyz3fhSls9olTQY5rrMhzv0qD.jpg" class="w-full h-full object-cover">
+                                                            </div>
+                            <div class="font-bold text-gray-900 text-sm">Yohanes Susanto</div>
+                            <div class="text-xs text-gray-600 font-semibold">President Director</div>
+                        </div>
+                        
+                                            </div>
+                </div>
+
+                
+                                <div class="text-center">
+                    <h4 class="text-2xl font-bold text-blue-900 uppercase mb-8 border-b-2 border-blue-900 inline-block pb-1">
+                        BISNIS MODEL DEM
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                                                <div class="group">
+                            <div class="w-32 h-32 mx-auto rounded-full border-4 border-blue-900 flex items-center justify-center bg-white shadow-lg overflow-hidden relative mb-4 transition-transform group-hover:scale-110">
+                                                                    <img src="http://127.0.0.1:8001/storage/company/business_models/S28V1TKXqf2fUL1EtFsHews9b36SMq4h5z0ZaGpM.png" class="w-full h-full object-cover">
+                                                            </div>
+                            <div class="bg-blue-900 text-white py-2 px-4 rounded-full text-sm font-bold mb-2 h-10 flex items-center justify-center min-w-[150px] mx-auto">
+                                Wiring Harness
+                            </div>
+                            <div class="text-sm text-gray-600 font-medium px-2">
+                                Wiring Harness 2W and 4W
+                            </div>
+                        </div>
+                                                <div class="group">
+                            <div class="w-32 h-32 mx-auto rounded-full border-4 border-blue-900 flex items-center justify-center bg-white shadow-lg overflow-hidden relative mb-4 transition-transform group-hover:scale-110">
+                                                                    <img src="http://127.0.0.1:8001/storage/company/business_models/SxMQ99K32WRR8ehxLR8GzTvZXEapvOkj1qFHJc8V.png" class="w-full h-full object-cover">
+                                                            </div>
+                            <div class="bg-blue-900 text-white py-2 px-4 rounded-full text-sm font-bold mb-2 h-10 flex items-center justify-center min-w-[150px] mx-auto">
+                                Automotive Electronic Part
+                            </div>
+                            <div class="text-sm text-gray-600 font-medium px-2">
+                                Head Unit, RSE, Antenna, USB Charger, Parking Sensor, Speaker
+                            </div>
+                        </div>
+                                                <div class="group">
+                            <div class="w-32 h-32 mx-auto rounded-full border-4 border-blue-900 flex items-center justify-center bg-white shadow-lg overflow-hidden relative mb-4 transition-transform group-hover:scale-110">
+                                                                    <img src="http://127.0.0.1:8001/storage/company/business_models/8z5VaVydgxbirlhPImoC5yKIYYY3JQ88sLYvkjhK.png" class="w-full h-full object-cover">
+                                                            </div>
+                            <div class="bg-blue-900 text-white py-2 px-4 rounded-full text-sm font-bold mb-2 h-10 flex items-center justify-center min-w-[150px] mx-auto">
+                                Power &amp; Energy Solution
+                            </div>
+                            <div class="text-sm text-gray-600 font-medium px-2">
+                                Charging Station, Battery Pack, Battery Cell
+                            </div>
+                        </div>
+                                                <div class="group">
+                            <div class="w-32 h-32 mx-auto rounded-full border-4 border-blue-900 flex items-center justify-center bg-white shadow-lg overflow-hidden relative mb-4 transition-transform group-hover:scale-110">
+                                                                    <img src="http://127.0.0.1:8001/storage/company/business_models/tOlyqPJnatHRAU7AjxjUZgzv8TZVLgS0rKf07NuK.png" class="w-full h-full object-cover">
+                                                            </div>
+                            <div class="bg-blue-900 text-white py-2 px-4 rounded-full text-sm font-bold mb-2 h-10 flex items-center justify-center min-w-[150px] mx-auto">
+                                AMR System
+                            </div>
+                            <div class="text-sm text-gray-600 font-medium px-2">
+                                AGV (Automated Guided Vehicle)
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                
+                
+                                <div class="text-center text-gray-500 italic mt-8 text-sm">
+                    "Knowledge &amp; Technology Transformation By Innovation For Employee Engagement"
+                </div>
+                            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Organization Structure Section -->
+<section class="organization-section" id="organization-structure" style="padding: 0 0 60px 0;">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" style="margin-bottom: 40px;">
+            <span class="lang-id" data-display="inline">Struktur Organisasi</span>
+            <span class="lang-en" style="display: none;" data-display="inline">Organization Structure</span>
+        </h2>
+        
+                <div class="org-chart-container">
+            <div class="org-chart">
+                                    <div class="org-node">
+    <div class="org-card level-0">
+                    <div class="org-photo-placeholder">
+                <i class="fas fa-user"></i>
+            </div>
+                <div class="org-name">Laberte Andre</div>
+        <div class="org-position">Division Head MPD</div>
+                    <div class="org-department">MPD</div>
+            </div>
+            <div class="org-children">
+                            <div class="org-node">
+    <div class="org-card level-1">
+                    <div class="org-photo-placeholder">
+                <i class="fas fa-user"></i>
+            </div>
+                <div class="org-name">Monica BA</div>
+        <div class="org-position">Section Head Cost Analsyt</div>
+                    <div class="org-department">Admin &amp; Cost Analyst</div>
+            </div>
+    </div>
+                    </div>
+    </div>
+                            </div>
+        </div>
+            </div>
+</section>
+
+<!-- Committee Activities Section -->
+<section class="committee-activities-section" id="committee-activities" style="padding: 0 0 60px 0;">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" style="margin-bottom: 40px;">
+            <span class="lang-id" data-display="inline">Aktivitas Kepanitiaan</span>
+            <span class="lang-en" style="display: none;" data-display="inline">Committee Activities</span>
+        </h2>
+        
+        <div class="committee-grid">
+                            <div class="text-center text-muted col-span-full" style="padding: 40px;">
+                    <i class="fas fa-calendar-check" style="font-size: 48px; opacity: 0.3; margin-bottom: 16px;"></i>
+                    <p>
+                        <span class="lang-id" data-display="block">Belum ada aktivitas kepanitiaan.</span>
+                        <span class="lang-en" style="display: none;" data-display="block">No committee activities yet.</span>
+                    </p>
+                </div>
+                    </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section class="selected-work" id="projects">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" data-translate="section_projects">Featured Projects</h2>
+        
+        <!-- Filter Tabs -->
+        <div class="filter-tabs-landing">
+            <button class="filter-tab-landing active" data-filter="all" data-translate="proj_all">All</button>
+                            <button class="filter-tab-landing" data-filter="ui-ux-design">UI/UX Design</button>
+                            <button class="filter-tab-landing" data-filter="web-development">Web Development</button>
+                            <button class="filter-tab-landing" data-filter="mobile-apps">Mobile Apps</button>
+                            <button class="filter-tab-landing" data-filter="branding">Branding</button>
+                            <button class="filter-tab-landing" data-filter="dashboard">Dashboard</button>
+                    </div>
+
+        <div class="projects-grid">
+                            <a href="http://127.0.0.1:8001/projects/budget-investment-system" class="project-card" data-category="web-development">
+                    <div class="project-thumbnail">
+                                                    <img src="http://127.0.0.1:8001/storage/projects/Xq4dW4CrhjjAgGYhiHXcy00Y6ILwn6YHy3IDJChE.png" alt="Budget &amp; Investment System">
+                                                <div class="project-title-overlay">
+                            <h3>Budget &amp; Investment System</h3>
+                        </div>
+                        <div class="project-overlay">
+                            <span class="view-project"><span data-translate="proj_view">View Project</span> <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                        <div class="project-tags">
+                                                                                                <span class="project-tag">Web App</span>
+                                                                    <span class="project-tag">Laravel</span>
+                                                                                    </div>
+                    </div>
+                    <div class="project-info">
+                        <p data-translate="proj_budget-investment-system_desc">Real-time data visualization tool for tracking investments and market trends.</p>
+                    </div>
+                </a>
+                    </div>
+
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section-landing" id="contact">
+    <div class="container">
+        <div class="contact-wrapper">
+            <div class="contact-info-landing">
+                <h2 class="section-title-experience fade-in-title" data-translate="section_contact">Get In Touch</h2>
+                <h2 class="section-title-large" data-translate="contact_title">Let's Work<br><span class="highlight">Together</span></h2>
+                <p data-translate="contact_text">Have a project in mind? I'd love to hear about it. Send me a message and let's create something amazing.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Find Me On Section -->
+<section class="find-me-section-wrapper" id="contact-social">
+    <div class="container">
+        <div class="social-grid">
+                            <a href="https://www.linkedin.com/in/tubagus-imran/" target="_blank" class="social-card">
+                    <div class="social-icon linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </div>
+                    <div class="social-info">
+                        <p><strong>LinkedIn</strong><span data-translate="social_linkedin">Connect professionally</span></p>
+                    </div>
+                </a>
+            
+            <a href="mailto:tebeeimran@gmail.com" class="social-card">
+                <div class="social-icon gmail">
+                    <i class="fab fa-google"></i>
+                </div>
+                <div class="social-info">
+                    <p><strong>Gmail</strong>tebeeimran@gmail.com</p>
+                </div>
+            </a>
+
+                            <a href="https://github.com/tebeeimran-bit" target="_blank" class="social-card">
+                    <div class="social-icon github">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="social-info">
+                        <p><strong>Github</strong><span data-translate="social_github">Check out my repositories</span></p>
+                    </div>
+                </a>
+            
+            <a href="https://wa.me/6285789710340" target="_blank" class="social-card">
+                <div class="social-icon whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="social-info">
+                    <p><strong>WhatsApp</strong><span data-translate="social_whatsapp">Chat with me</span></p>
+                </div>
+            </a>
+
+                            <a href="https://www.instagram.com/tebeimran/" target="_blank" class="social-card">
+                    <div class="social-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="social-info">
+                        <p><strong>Instagram</strong><span data-translate="social_instagram">See my daily life</span></p>
+                    </div>
+                </a>
+            
+                            <a href="https://www.facebook.com/tb.imran19/" target="_blank" class="social-card">
+                    <div class="social-icon facebook">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <div class="social-info">
+                        <p><strong>Facebook</strong><span data-translate="social_facebook">Connect with me</span></p>
+                    </div>
+                </a>
+                    </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- Automation & Digitalization Strategy Section -->
+<section class="automation-section-landing" id="automation-strategy">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" data-translate="nav_automation_strategy">Manufacturing, Digitalization & Automation Strategy</h2>
+        
+        <div class="strategy-roadmap">
+                                    
+                                                
+                        <div class="strategy-column step-2 fade-in-up" style="animation-delay: 150ms">
+                <div class="strategy-card">
+                    <div class="strategy-header">
+                        <div class="strategy-dot">2</div>
+                        <h3 class="strategy-term-title">Middle Term Strategy</h3>
+                    </div>
+                    
+                    <div class="strategy-body">
+                                                
+                                                <div class="strategy-category">
+                            <h4 class="category-title digitalization">DIGITALIZATION & AUTOMATION :</h4>
+                                                        <div class="strategy-item">
+                                <em>:</em>
+                                                                <ul class="strategy-bullets">
+                                                                        <li>Real-time dashboard monitoring</li>
+                                                                    </ul>
+                                                            </div>
+                                                    </div>
+                                            </div>
+                </div>
+                <div class="strategy-arrow">→</div>
+            </div>
+                                                
+                        <div class="strategy-column step-1 fade-in-up" style="animation-delay: 300ms">
+                <div class="strategy-card">
+                    <div class="strategy-header">
+                        <div class="strategy-dot">1</div>
+                        <h3 class="strategy-term-title">Short Term Strategy</h3>
+                    </div>
+                    
+                    <div class="strategy-body">
+                                                
+                                                <div class="strategy-category">
+                            <h4 class="category-title digitalization">DIGITALIZATION & AUTOMATION :</h4>
+                                                        <div class="strategy-item">
+                                <em>Maintenance System Operation</em>
+                                                                <ul class="strategy-bullets">
+                                                                        <li>Maintenance</li>
+                                                                    </ul>
+                                                            </div>
+                                                    </div>
+                                            </div>
+                </div>
+                <div class="strategy-arrow">→</div>
+            </div>
+                                </div>
+    </div>
+</section>
+
+<style>
+/* Automation Strategy Section Styles */
+.automation-section-landing {
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+}
+
+.strategy-roadmap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 40px;
+    position: relative;
+}
+
+/* Individual strategy column as arrow step */
+.strategy-column {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Ascending staircase - step 1 at bottom-left, ascending to step 3 at top-right */
+.strategy-column.step-1 {
+    margin-left: 0;
+    max-width: 70%;
+}
+
+.strategy-column.step-2 {
+    margin-left: 15%;
+    max-width: 70%;
+}
+
+.strategy-column.step-3 {
+    margin-left: 30%;
+    max-width: 70%;
+}
+
+/* Card container */
+.strategy-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Left colored border */
+.strategy-column.step-1 .strategy-card {
+    border-left: 5px solid #3b82f6;
+}
+
+.strategy-column.step-2 .strategy-card {
+    border-left: 5px solid #f59e0b;
+}
+
+.strategy-column.step-3 .strategy-card {
+    border-left: 5px solid #10b981;
+}
+
+/* Top gradient accent */
+.strategy-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+}
+
+.strategy-column.step-1 .strategy-card::before {
+    background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+}
+
+.strategy-column.step-2 .strategy-card::before {
+    background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+}
+
+.strategy-column.step-3 .strategy-card::before {
+    background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+}
+
+/* Arrow indicator */
+.strategy-arrow {
+    font-size: 2.5rem;
+    font-weight: bold;
+    flex-shrink: 0;
+    animation: arrowBounce 1.5s ease-in-out infinite;
+}
+
+.strategy-column.step-1 .strategy-arrow {
+    color: #3b82f6;
+    animation-delay: 0.6s;
+}
+
+.strategy-column.step-2 .strategy-arrow {
+    color: #f59e0b;
+    animation-delay: 0.3s;
+}
+
+.strategy-column.step-3 .strategy-arrow {
+    color: #10b981;
+    animation-delay: 0s;
+}
+
+@keyframes arrowBounce {
+    0%, 100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(8px);
+        opacity: 0.7;
+    }
+}
+
+.strategy-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.strategy-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.strategy-column.step-1 .strategy-dot {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.strategy-column.step-2 .strategy-dot {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.strategy-column.step-3 .strategy-dot {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.strategy-term-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e3a5f;
+    margin: 0;
+}
+
+.strategy-body {
+    /* Content styles */
+}
+
+.strategy-category {
+    margin-bottom: 14px;
+}
+
+.strategy-category:last-child {
+    margin-bottom: 0;
+}
+
+.category-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.category-title.manufacturing {
+    color: #dc2626;
+}
+
+.category-title.digitalization {
+    color: #7c3aed;
+}
+
+.strategy-item {
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: #374151;
+}
+
+.strategy-item strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #1f2937;
+}
+
+.strategy-item em {
+    display: block;
+    margin-bottom: 3px;
+    font-style: italic;
+    color: #4b5563;
+}
+
+.strategy-bullets {
+    margin: 4px 0 0 0;
+    padding-left: 16px;
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.strategy-bullets li {
+    margin-bottom: 2px;
+    line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .strategy-roadmap {
+        gap: 16px;
+    }
+    
+    .strategy-column.step-1,
+    .strategy-column.step-2,
+    .strategy-column.step-3 {
+        margin-left: 0;
+        max-width: 100%;
+    }
+    
+    .strategy-arrow {
+        display: none;
+    }
+}
+</style>
+
+<!-- Obstacle & Challenge Section -->
+<section class="obstacle-challenge-section" id="obstacle-challenge">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" data-translate="nav_obstacle_challenge">Obstacle & Challenge</h2>
+        
+        <div class="obstacle-challenge-grid">
+            <!-- Obstacles Column -->
+            <div class="oc-column obstacles-column fade-in-up">
+                <div class="oc-header obstacles-header">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Obstacles</h3>
+                </div>
+                <div class="oc-content">
+                                        <div class="oc-card obstacle-card">
+                        <h4 class="oc-title">Obstacle</h4>
+                                                                    </div>
+                                    </div>
+            </div>
+            
+            <!-- Challenges Column -->
+            <div class="oc-column challenges-column fade-in-up" style="animation-delay: 200ms">
+                <div class="oc-header challenges-header">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Challenges</h3>
+                </div>
+                <div class="oc-content">
+                                        <p class="oc-empty">Belum ada challenge.</p>
+                                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Obstacle & Challenge Section Styles */
+.obstacle-challenge-section {
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+}
+
+.obstacle-challenge-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.oc-column {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.oc-header {
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.oc-header i {
+    font-size: 1.5rem;
+}
+
+.oc-header h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.obstacles-header {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    color: white;
+}
+
+.challenges-header {
+    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+    color: white;
+}
+
+.oc-content {
+    padding: 24px;
+}
+
+.oc-card {
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    transition: transform 0.2s ease;
+}
+
+.oc-card:last-child {
+    margin-bottom: 0;
+}
+
+.oc-card:hover {
+    transform: translateX(5px);
+}
+
+.obstacle-card {
+    background: rgba(220, 38, 38, 0.05);
+    border-left: 4px solid #dc2626;
+}
+
+.challenge-card {
+    background: rgba(245, 158, 11, 0.05);
+    border-left: 4px solid #f59e0b;
+}
+
+.oc-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e3a5f;
+    margin: 0 0 8px 0;
+}
+
+.oc-description {
+    font-size: 0.9rem;
+    color: #4b5563;
+    margin: 0 0 10px 0;
+    line-height: 1.5;
+}
+
+.oc-items {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.oc-items li {
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.oc-empty {
+    color: #9ca3af;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .obstacle-challenge-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<!-- Job Description & Activity Section -->
+<section class="job-description-section" id="job-description">
+    <div class="container">
+        <h2 class="section-title-experience fade-in-title" data-translate="nav_job_description">Job Description & Activity</h2>
+        
+        <div class="job-description-grid">
+            <!-- Job Descriptions Column -->
+            <div class="jd-column descriptions-column fade-in-up">
+                <div class="jd-header descriptions-header">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Job Descriptions</h3>
+                </div>
+                <div class="jd-content">
+                                        <p class="jd-empty">Belum ada job description.</p>
+                                    </div>
+            </div>
+            
+            <!-- Activity Jobs Column -->
+            <div class="jd-column activities-column fade-in-up" style="animation-delay: 200ms">
+                <div class="jd-header activities-header">
+                    <i class="fas fa-tasks"></i>
+                    <h3>Activity Jobs</h3>
+                </div>
+                <div class="jd-content">
+                                        <p class="jd-empty">Belum ada activity job.</p>
+                                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Job Description & Activity Section Styles */
+.job-description-section {
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+}
+
+.job-description-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.jd-column {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.jd-header {
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.jd-header i {
+    font-size: 1.5rem;
+}
+
+.jd-header h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.descriptions-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+    color: white;
+}
+
+.activities-header {
+    background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    color: white;
+}
+
+.jd-content {
+    padding: 24px;
+}
+
+.jd-card {
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    transition: transform 0.2s ease;
+}
+
+.jd-card:last-child {
+    margin-bottom: 0;
+}
+
+.jd-card:hover {
+    transform: translateX(5px);
+}
+
+.description-card {
+    background: rgba(59, 130, 246, 0.05);
+    border-left: 4px solid #3b82f6;
+}
+
+.activity-card {
+    background: rgba(16, 185, 129, 0.05);
+    border-left: 4px solid #10b981;
+}
+
+.jd-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e3a5f;
+    margin: 0 0 8px 0;
+}
+
+.jd-description {
+    font-size: 0.9rem;
+    color: #4b5563;
+    margin: 0 0 10px 0;
+    line-height: 1.5;
+}
+
+.jd-items {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.jd-items li {
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.jd-empty {
+    color: #9ca3af;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .job-description-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<!-- Contact Form Section -->
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="container">
+                    <p data-translate="footer_text">&copy; 2026 Portfolio. Built with 💜 by <a href="http://127.0.0.1:8001">Developer</a></p>
+                    <a href="http://127.0.0.1:8001/admin" class="hidden-admin-link" title="Admin Access">
+                        <i class="fas fa-lock"></i>
+                    </a>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <style>
+        /* Language Toggle Styles */
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 4px;
+            background: #2d3748;
+            padding: 4px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            color: #ffffff;
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        @media (max-width: 576px) {
+            .lang-toggle {
+                top: 10px;
+                right: 10px;
+            }
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+
+        /* Hidden Admin Link Styles */
+        .footer {
+            position: relative;
+        }
+        
+        .hidden-admin-link {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: #4b5563; /* Match footer text color */
+            opacity: 0.1;
+            font-size: 12px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .hidden-admin-link:hover {
+            opacity: 1;
+            color: #5FCECE;
+        }
+    </style>
+
+    <script>
+        const translations = {
+            'en': {
+                'nav_home': 'Home',
+                'nav_about': 'About',
+                'nav_projects': 'Projects',
+                'nav_company_profile': 'Company Profile',
+                'nav_organization_structure': 'Organization Structure',
+                'nav_committee_activities': 'Committee Activities',
+                'nav_career_aspiration': 'Career Aspiration',
+                'nav_automation_strategy': 'Automation Strategy',
+                'nav_contact': 'Contact',
+                'hero_cv': 'Download CV',
+                'hero_contact': 'Contact Me',
+                'stats_years': 'Years Experience',
+                'stats_projects': 'Projects Completed',
+                'stats_clients': 'Happy Clients',
+                'stats_awards': 'Awards Won',
+                'section_about': 'About Me',
+                'section_exp': 'Professional Experience',
+                'section_edu': 'Education',
+                'section_tech': 'Tech Stack That I Use',
+                'section_tech': 'Tech Stack That I Use',
+                'section_tech': 'Tech Stack That I Use',
+                'section_projects': 'Featured Projects',
+                'section_contact': 'Get In Touch',
+                'contact_title': 'Let\'s Work <span class="highlight">Together</span>',
+                'contact_text': 'Have a project in mind? I\'d love to hear about it. Send me a message and let\'s create something amazing.',
+                'footer_text': '&copy; 2024 Portfolio. Built with 💜 by <a href="/">Developer</a>',
+                'hero_greeting': 'Hi, Folks 👋',
+                'hero_role_prefix': 'I\'m ',
+                'hero_bio': 'I am a Fullstack Developer from Indonesia, I have a strong understanding of programming languages and have experience in Mobile And Web Developer projects.',
+                'about_desc': 'I started coding when I was 15, building simple WordPress themes. What began as a curiosity quickly turned into a career obsession. Today, I specialize in the MERN stack and Python. I believe code is just a tool to solve human problems, and I strive to make those solutions as elegant as possible.',
+                'exp_start': 'Start',
+                'exp_end': 'End',
+                'exp_location': 'Location',
+                'exp_status_intern': 'Internship (Remote)',
+                'exp_status_part': 'Part-time',
+                'edu_uni_name': 'University of Technology',
+                'edu_uni_degree': 'Bachelor of Computer Science',
+                'edu_gpa': 'GPA 3.8',
+                'edu_uni_desc': 'Focused on Software Engineering and Artificial Intelligence. Active in student organizations and completed a thesis on Machine Learning for accessibility.',
+                'edu_hs_name': 'Vocational High School',
+                'edu_hs_degree': 'Software Engineering',
+                'edu_best_grad': 'Best Graduate',
+                'edu_hs_desc': 'Learned the fundamentals of programming, web development, and database management. Participated in national coding competitions.',
+                'proj_all': 'All',
+                'proj_view': 'View Project',
+                'proj_empty': 'No projects yet. Add some from the admin panel!',
+                'social_linkedin': 'Connect professionally',
+                'social_github': 'Check out my repositories',
+                'social_whatsapp': 'Chat with me',
+                'social_instagram': 'See my daily life',
+                'social_facebook': 'Connect with me',
+                
+                // Projects (Seeded)
+                'proj_e-commerce-redesign_title': 'E-Commerce Redesign',
+                'proj_e-commerce-redesign_desc': 'A complete overhaul of the shopping experience focusing on conversion, accessibility, and mobile responsiveness.',
+                'proj_finance-dashboard_title': 'Finance Dashboard',
+                'proj_finance-dashboard_desc': 'Real-time data visualization tool for tracking investments and market trends.',
+                'proj_travel-brand-identity_title': 'Travel Brand Identity',
+                'proj_travel-brand-identity_desc': 'Complete visual identity system for a luxury travel agency specializing in remote destinations.',
+                'proj_fintech-mobile-app_title': 'Fintech Mobile App',
+                'proj_fintech-mobile-app_desc': 'Personal finance application that helps users track spending and set savings goals.',
+                'proj_corporate-landing-page_title': 'Corporate Landing Page',
+                'proj_corporate-landing-page_desc': 'Marketing website for B2B SaaS startup, optimized for SEO and conversion.',
+                'proj_health-tracker-ios_title': 'Health Tracker iOS',
+                'proj_health-tracker-ios_desc': 'Health tracking app connected to Apple Watch for monitoring fitness goals.',
+            },
+            'id': {
+                'nav_home': 'Beranda',
+                'nav_about': 'Tentang',
+                'nav_projects': 'Proyek',
+                'nav_company_profile': 'Profil Perusahaan',
+                'nav_organization_structure': 'Struktur Organisasi',
+                'nav_committee_activities': 'Aktivitas Kepanitiaan',
+                'nav_career_aspiration': 'Aspirasi Karir',
+                'nav_automation_strategy': 'Strategi Otomasi',
+                'nav_contact': 'Kontak',
+                'hero_cv': 'Unduh CV',
+                'hero_contact': 'Hubungi Saya',
+                'stats_years': 'Tahun Pengalaman',
+                'stats_projects': 'Proyek Selesai',
+                'stats_clients': 'Klien Puas',
+                'stats_awards': 'Penghargaan',
+                'section_about': 'Tentang Saya',
+                'section_exp': 'Pengalaman Kerja',
+                'section_edu': 'Pendidikan',
+                'section_tech': 'Teknologi Yang Saya Gunakan',
+                'section_certifications': 'Sertifikasi',
+                'section_projects': 'Proyek Unggulan',
+                'section_contact': 'Hubungi Saya',
+                'contact_title': 'Mari Bekerja <span class="highlight">Sama</span>',
+                'contact_text': 'Punya ide proyek? Saya ingin mendengarnya. Kirim pesan dan mari ciptakan sesuatu yang luar biasa.',
+                'footer_text': '&copy; 2024 Portfolio. Dibuat dengan 💜 oleh <a href="/">Developer</a>',
+                'hero_greeting': 'Halo, Semuanya 👋',
+                'hero_role_prefix': 'Saya seorang ',
+                'hero_bio': 'Saya adalah Pengembang Fullstack dari Indonesia, saya memiliki pemahaman yang kuat tentang bahasa pemrograman dan berpengalaman dalam proyek Pengembang Web dan Seluler.',
+                'about_desc': 'Saya mulai coding sejak usia 15 tahun, membuat tema WordPress sederhana. Apa yang berawal dari rasa ingin tahu dengan cepat berubah menjadi obsesi karier. Hari ini, saya berspesialisasi dalam tumpukan MERN dan Python. Saya percaya kode hanyalah alat untuk memecahkan masalah manusia, dan saya berusaha membuat solusi tersebut se-elegan mungkin.',
+                'exp_start': 'Mulai',
+                'exp_end': 'Sampai',
+                'exp_location': 'Lokasi',
+                'exp_status_intern': 'Magang (Remote)',
+                'exp_status_part': 'Paruh Waktu',
+                'edu_uni_name': 'Universitas Teknologi',
+                'edu_uni_degree': 'Sarjana Ilmu Komputer',
+                'edu_gpa': 'IPK 3.8',
+                'edu_uni_desc': 'Fokus pada Rekayasa Perangkat Lunak dan Kecerdasan Buatan. Aktif dalam organisasi kemahasiswaan dan menyelesaikan skripsi tentang Machine Learning untuk aksesibilitas.',
+                'edu_hs_name': 'Sekolah Menengah Kejuruan',
+                'edu_hs_degree': 'Rekayasa Perangkat Lunak',
+                'edu_best_grad': 'Lulusan Terbaik',
+                'edu_hs_desc': 'Mempelajari dasar-dasar pemrograman, pengembangan web, dan manajemen basis data. Berpartisipasi dalam kompetisi coding nasional.',
+                'proj_all': 'Semua',
+                'proj_view': 'Lihat Proyek',
+                'proj_empty': 'Belum ada proyek. Tambahkan dari panel admin!',
+                'social_linkedin': 'Terhubung secara profesional',
+                'social_github': 'Lihat repositori saya',
+                'social_whatsapp': 'Ngobrol dengan saya',
+                'social_instagram': 'Lihat keseharian saya',
+                'social_facebook': 'Terhubung dengan saya',
+                
+                // Projects (Seeded)
+                'proj_e-commerce-redesign_title': 'Desain Ulang E-Commerce',
+                'proj_e-commerce-redesign_desc': 'Perombakan total pengalaman berbelanja yang berfokus pada konversi, aksesibilitas, dan responsivitas seluler.',
+                'proj_finance-dashboard_title': 'Dashboard Keuangan',
+                'proj_finance-dashboard_desc': 'Alat visualisasi data waktu nyata untuk melacak investasi dan tren pasar.',
+                'proj_travel-brand-identity_title': 'Identitas Merek Travel',
+                'proj_travel-brand-identity_desc': 'Sistem identitas visual lengkap untuk agen perjalanan mewah yang berspesialisasi dalam destinasi terpencil.',
+                'proj_fintech-mobile-app_title': 'Aplikasi Mobile Fintech',
+                'proj_fintech-mobile-app_desc': 'Aplikasi keuangan pribadi yang membantu pengguna melacak pengeluaran dan menetapkan tujuan tabungan.',
+                'proj_corporate-landing-page_title': 'Halaman Landing Korporat',
+                'proj_corporate-landing-page_desc': 'Situs web pemasaran untuk startup SaaS B2B, dioptimalkan untuk SEO dan konversi.',
+                'proj_health-tracker-ios_title': 'Pelacak Kesehatan iOS',
+                'proj_health-tracker-ios_desc': 'Aplikasi pelacakan kesehatan yang terhubung ke Apple Watch untuk memantau tujuan kebugaran.',
+            }
+        };
+
+        function setLanguage(lang) {
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('lang-' + lang).classList.add('active');
+            
+            // Store preference
+            localStorage.setItem('lang', lang);
+            
+            // Apply translations to text content
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Apply translations to titles (for sidebar tooltips)
+            document.querySelectorAll('[data-translate-title]').forEach(element => {
+                const key = element.getAttribute('data-translate-title');
+                if (translations[lang][key]) {
+                    element.setAttribute('title', translations[lang][key]);
+                }
+            });
+
+            // Apply dynamic translations from DB (Database Content)
+            document.querySelectorAll('[data-dynamic-id][data-dynamic-en]').forEach(element => {
+                const content = lang === 'id' ? element.getAttribute('data-dynamic-id') : element.getAttribute('data-dynamic-en');
+                // Only update if content is not empty/null "null" string
+                if (content && content !== 'null' && content.trim() !== '') {
+                    element.innerHTML = content;
+                }
+            });
+
+            // Toggle Class-based Dual Language Content (New System)
+            if (lang === 'id') {
+                document.querySelectorAll('.lang-id').forEach(el => {
+                    el.style.display = el.getAttribute('data-display') || 'block';
+                });
+                document.querySelectorAll('.lang-en').forEach(el => {
+                    el.style.display = 'none';
+                });
+            } else {
+                document.querySelectorAll('.lang-en').forEach(el => {
+                    el.style.display = el.getAttribute('data-display') || 'block';
+                });
+                document.querySelectorAll('.lang-id').forEach(el => {
+                    el.style.display = 'none';
+                });
+            }
+            
+            console.log('Language set to: ' + lang);
+        }
+
+        // Load saved language preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('lang') || 'en';
+            setLanguage(savedLang);
+
+            // Scroll Spy for Sidebar
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.sidebar-nav .nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-50% 0px -50% 0px', // Active when element is in middle of screen
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        
+                        // Remove active class from all links
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            
+                            // Check if this link corresponds to the current section
+                            const href = link.getAttribute('href');
+                            const isHome = id === 'home' && !href.includes('#');
+                            const isSection = href.includes('#' + id);
+                            
+                            if (isHome || isSection) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                if(section.id === 'home' || section.id === 'about' || section.id === 'projects' || section.id === 'contact-social') {
+                    observer.observe(section);
+                }
+            });
+        });
+    </script>
+
+    <script>
+// Scramble Text Effect for "Tubagus Imran"
+class ScrambleText {
+    constructor(element) {
+        this.element = element;
+        this.chars = '!<>-_\\/[]{}—=+*^?#________';
+        this.update = this.update.bind(this);
+    }
+    
+    setText(newText) {
+        const oldText = this.element.innerText;
+        const length = Math.max(oldText.length, newText.length);
+        const promise = new Promise((resolve) => this.resolve = resolve);
+        this.queue = [];
+        
+        for (let i = 0; i < length; i++) {
+            const from = oldText[i] || '';
+            const to = newText[i] || '';
+            const start = Math.floor(Math.random() * 40);
+            const end = start + Math.floor(Math.random() * 40);
+            this.queue.push({ from, to, start, end });
+        }
+        
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        this.update();
+        return promise;
+    }
+    
+    update() {
+        let output = '';
+        let complete = 0;
+        
+        for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i];
+            
+            if (this.frame >= end) {
+                complete++;
+                output += to;
+            } else if (this.frame >= start) {
+                if (!char || Math.random() < 0.28) {
+                    char = this.randomChar();
+                    this.queue[i].char = char;
+                }
+                output += `<span class="scramble-char">${char}</span>`;
+            } else {
+                output += from;
+            }
+        }
+        
+        this.element.innerHTML = output;
+        
+        if (complete === this.queue.length) {
+            this.resolve();
+        } else {
+            this.frameRequest = requestAnimationFrame(this.update);
+            this.frame++;
+        }
+    }
+    
+    randomChar() {
+        return this.chars[Math.floor(Math.random() * this.chars.length)];
+    }
+}
+
+// Initialize Scramble Effect with Scroll Observer
+document.addEventListener('DOMContentLoaded', function() {
+    const scrambleElement = document.getElementById('scramble-text');
+    if (scrambleElement) {
+        const targetText = scrambleElement.getAttribute('data-text');
+        const scramble = new ScrambleText(scrambleElement);
+        
+        // Intersection Observer for scroll-triggered animation
+        const scrambleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Clear text and re-animate when scrolling into view
+                    scrambleElement.textContent = '';
+                    scramble.setText(targetText);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        scrambleObserver.observe(scrambleElement);
+        
+        // Initial animation on page load
+        setTimeout(() => {
+            scramble.setText(targetText);
+        }, 300);
+    }
+    
+    // Initialize fade-in/fade-out animation for section titles (repeatable)
+    document.querySelectorAll('.fade-in-title').forEach(titleElement => {
+        const titleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Fade in + slide up when entering view
+                    titleElement.classList.add('visible');
+                } else {
+                    // Fade out + slide down when leaving view
+                    titleElement.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        titleObserver.observe(titleElement);
+    });
+    
+    // Typed.js Initialization
+    const titleString = "Costing Eng Admin";
+    const typedStrings = titleString.split(',').map(s => s.trim());
+
+    var typed = new Typed('#typed', {
+        strings: typedStrings,
+        typeSpeed: 50,
+        backSpeed: 30,
+        backDelay: 3000,
+        loop: true,
+        showCursor: true,
+        cursorChar: '|'
+    });
+});
+
+// Smooth scroll for anchor links
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        const targetId = href.includes('#') ? '#' + href.split('#')[1] : null;
+        
+        // If it's just a hash or a link to current page + hash
+        if (targetId && (href.startsWith('#') || href.includes(window.location.pathname))) {
+            const target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                history.pushState(null, null, targetId);
+            }
+        }
+    });
+});
+
+// Animate skill bars on scroll
+const animateSkillBars = () => {
+    document.querySelectorAll('.skill-progress').forEach(bar => {
+        const width = bar.getAttribute('data-width');
+        bar.style.width = width + '%';
+    });
+};
+
+// Counter animation
+const animateCounters = () => {
+    document.querySelectorAll('.stat-number-landing').forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                counter.textContent = Math.floor(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target;
+            }
+        };
+        updateCounter();
+    });
+};
+
+// Project filter
+document.querySelectorAll('.filter-tab-landing').forEach(tab => {
+    tab.addEventListener('click', function() {
+        document.querySelectorAll('.filter-tab-landing').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        const filter = this.getAttribute('data-filter');
+        document.querySelectorAll('.project-card').forEach(card => {
+            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+
+// Run animations on load
+window.addEventListener('load', () => {
+    setTimeout(animateSkillBars, 500);
+    animateCounters();
+});
+
+// Scroll animation for experience section
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const fadeInObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in-visible');
+        } else {
+            // Remove class when scrolling out to allow re-animation
+            entry.target.classList.remove('fade-in-visible');
+        }
+    });
+}, observerOptions);
+
+// Observe all exp-card and exp-badge elements
+document.querySelectorAll('.exp-card, .exp-badge').forEach(el => {
+    el.classList.add('fade-in-element');
+    fadeInObserver.observe(el);
+    
+    // Add hover animation
+    el.addEventListener('mouseenter', () => {
+        el.classList.add('hover-animate');
+    });
+    el.addEventListener('mouseleave', () => {
+        el.classList.remove('hover-animate');
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const viewMoreBtn = document.getElementById('view-more-btn');
+    if (viewMoreBtn) {
+        viewMoreBtn.addEventListener('click', function() {
+            const hiddenItems = document.querySelectorAll('.exp-hidden-item');
+            const isExpanded = this.classList.contains('active');
+            const btnText = this.querySelector('span');
+            
+            if (isExpanded) {
+                // Collapse
+                window.location.href = '#experience'; 
+                setTimeout(() => {
+                    hiddenItems.forEach(item => {
+                        item.style.display = 'none';
+                        item.classList.remove('fade-in-item');
+                    });
+                    this.classList.remove('active');
+                    btnText.textContent = 'View More Experience';
+                }, 100);
+            } else {
+                // Expand
+                hiddenItems.forEach((item, index) => {
+                    item.style.display = 'grid'; // FIXED: Restore grid layout
+                    item.style.animationDelay = `${index * 0.1}s`;
+                    item.classList.add('fade-in-item');
+                });
+                this.classList.add('active');
+                btnText.textContent = 'View Less Experience';
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

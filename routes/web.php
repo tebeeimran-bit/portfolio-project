@@ -25,10 +25,14 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store')->middleware('throttle:3,1');
 
 
+
+
+
 // Admin routes
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/update-sections', [DashboardController::class, 'updateSections'])->name('update-sections');
+    Route::post('/update-sidebar-menus', [DashboardController::class, 'updateSidebarMenus'])->name('update-sidebar-menus');
     Route::resource('projects', AdminProjectController::class);
     Route::post('/experiences/generate-description', [AdminExperienceController::class, 'generateDescription'])->name('experiences.generate-description');
     Route::post('/experiences/translate', [AdminExperienceController::class, 'translate'])->name('experiences.translate');
@@ -58,6 +62,32 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     // CV Generator
     Route::get('/cv', [\App\Http\Controllers\Admin\CVController::class, 'index'])->name('cv.index');
     Route::get('/cv/preview', [\App\Http\Controllers\Admin\CVController::class, 'preview'])->name('cv.preview');
+
+    // Company Profile
+    Route::get('/company-profile', [\App\Http\Controllers\Admin\CompanyProfileController::class, 'index'])->name('company-profile.index');
+    Route::put('/company-profile', [\App\Http\Controllers\Admin\CompanyProfileController::class, 'update'])->name('company-profile.update');
+
+    // Organization Structure
+    Route::resource('organization-structure', \App\Http\Controllers\Admin\OrganizationStructureController::class);
+
+    // Committee Activities
+    Route::resource('committee-activities', \App\Http\Controllers\Admin\CommitteeActivityController::class);
+
+    // Career Aspiration
+    Route::get('/career-aspiration', [\App\Http\Controllers\Admin\CareerAspirationController::class, 'index'])->name('career-aspiration.index');
+    Route::put('/career-aspiration', [\App\Http\Controllers\Admin\CareerAspirationController::class, 'update'])->name('career-aspiration.update');
+
+    // Automation Strategies
+    Route::resource('automation-strategies', \App\Http\Controllers\Admin\AutomationStrategyController::class);
+
+    // Obstacle & Challenges
+    Route::resource('obstacle-challenges', \App\Http\Controllers\Admin\ObstacleChallengeController::class);
+
+    // Job Descriptions & Activities
+    Route::resource('job-descriptions', \App\Http\Controllers\Admin\JobDescriptionController::class);
+
+    // Business Process Flows
+    Route::resource('business-process-flows', \App\Http\Controllers\Admin\BusinessProcessFlowController::class);
 });
 
 // Breeze auth routes

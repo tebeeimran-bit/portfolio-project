@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    
+    <!-- Scripts & Styles -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
 <body>
@@ -33,41 +36,80 @@
                     <i class="fas fa-th-large"></i>
                     <span>Dashboard</span>
                 </a>
+                
                 <a href="{{ route('admin.projects.index') }}" class="nav-item {{ request()->routeIs('admin.projects.*') ? 'active' : '' }}">
-                    <i class="fas fa-folder"></i>
+                    <i class="fas fa-folder-open"></i>
                     <span>Projects</span>
                 </a>
+                
                 <a href="{{ route('admin.experiences.index') }}" class="nav-item {{ request()->routeIs('admin.experiences.*') ? 'active' : '' }}">
                     <i class="fas fa-briefcase"></i>
                     <span>Experience</span>
                 </a>
+                
                 <a href="{{ route('admin.education.index') }}" class="nav-item {{ request()->routeIs('admin.education.*') ? 'active' : '' }}">
                     <i class="fas fa-graduation-cap"></i>
                     <span>Education</span>
                 </a>
+                
                 <a href="{{ route('admin.technologies.index') }}" class="nav-item {{ request()->routeIs('admin.technologies.*') ? 'active' : '' }}">
                     <i class="fas fa-code"></i>
                     <span>Tech Stack</span>
                 </a>
+                
                 <a href="{{ route('admin.skills.index') }}" class="nav-item {{ request()->routeIs('admin.skills.*') ? 'active' : '' }}">
                     <i class="fas fa-list-ul"></i>
                     <span>Skills</span>
                 </a>
+                
                 <a href="{{ route('admin.certifications.index') }}" class="nav-item {{ request()->routeIs('admin.certifications.*') ? 'active' : '' }}">
                     <i class="fas fa-certificate"></i>
                     <span>Certifications</span>
                 </a>
+                
+                <a href="{{ route('admin.company-profile.index') }}" class="nav-item {{ request()->routeIs('admin.company-profile.*') ? 'active' : '' }}">
+                    <i class="fas fa-building"></i>
+                    <span>Company Profile</span>
+                </a>
+                
+                <a href="{{ route('admin.organization-structure.index') }}" class="nav-item {{ request()->routeIs('admin.organization-structure.*') ? 'active' : '' }}">
+                    <i class="fas fa-sitemap"></i>
+                    <span>Struktur Organisasi</span>
+                </a>
+                
+                <a href="{{ route('admin.committee-activities.index') }}" class="nav-item {{ request()->routeIs('admin.committee-activities.*') ? 'active' : '' }}">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Aktivitas Kepanitiaan</span>
+                </a>
+                
+                <a href="{{ route('admin.career-aspiration.index') }}" class="nav-item {{ request()->routeIs('admin.career-aspiration.*') ? 'active' : '' }}">
+                    <i class="fas fa-rocket"></i>
+                    <span>Career Aspiration</span>
+                </a>
+                
+                <a href="{{ route('admin.automation-strategies.index') }}" class="nav-item {{ request()->routeIs('admin.automation-strategies.*') ? 'active' : '' }}">
+                    <i class="fas fa-cogs"></i>
+                    <span>Strategi Otomasi</span>
+                </a>
+                
+                <a href="{{ route('admin.obstacle-challenges.index') }}" class="nav-item {{ request()->routeIs('admin.obstacle-challenges.*') ? 'active' : '' }}">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Obstacle & Challenge</span>
+                </a>
+                
+                <a href="{{ route('admin.job-descriptions.index') }}" class="nav-item {{ request()->routeIs('admin.job-descriptions.*') ? 'active' : '' }}">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Job Description</span>
+                </a>
+
+                <a href="{{ route('admin.business-process-flows.index') }}" class="nav-item {{ request()->routeIs('admin.business-process-flows.*') ? 'active' : '' }}">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Business Flows</span>
+                </a>
+
                 <a href="{{ route('admin.settings') }}" class="nav-item {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
                     <i class="fas fa-cog"></i>
                     <span>Settings</span>
-                </a>
-                <a href="{{ route('admin.visitors.index') }}" class="nav-item {{ request()->routeIs('admin.visitors.index') ? 'active' : '' }}">
-                    <i class="fas fa-users"></i>
-                    <span>Visitor Logs</span>
-                </a>
-                <a href="{{ route('admin.cv.index') }}" class="nav-item {{ request()->routeIs('admin.cv.*') ? 'active' : '' }}">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Generate CV</span>
                 </a>
             </nav>
 
